@@ -19,12 +19,7 @@ class Profile(models.Model):
         on_delete=models.CASCADE
     )
     date_of_birth = models.DateField(blank=True, null=True)
-    phone_number = models.CharField(
-        max_length=15,
-        validators=[RegexValidator(r'^\+?1?\d{9,15}$', 'Phone must be entered in the format: +999999999')],
-        help_text='Enter phone number in the format: +999999999'
-    )
-    address_line_1 = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
     designation = models.CharField(max_length=30, choices=DESIGNATION_CHOICES)
     joining_date = models.DateField()
     phone_number = models
@@ -39,6 +34,7 @@ class Profile(models.Model):
         null=True,
         default=f'user_default.png'
     )
+    contact_no = models.CharField(max_length=15)
 
     def __Str__(self):
         return f'Profile of {self.username}'
