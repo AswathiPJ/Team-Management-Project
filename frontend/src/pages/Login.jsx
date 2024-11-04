@@ -1,10 +1,6 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
-
 function Login() {
   return (
     <>
-    <Navbar/>
     <div className="flex justify-center items-center min-h-screen">
     <div className='container w-full max-w-md'>
     <h1 className="text-2xl font-bold text-center mb-6">Login</h1>
