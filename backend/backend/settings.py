@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account.apps.AccountConfig',
     'tasks.apps.TasksConfig',
+    'meeting.apps.MeetingConfig',
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders'
