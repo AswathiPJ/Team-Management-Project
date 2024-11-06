@@ -20,5 +20,5 @@ class TaskAdmin(admin.ModelAdmin):
     date_hierarchy = "due_date"
     
     def get_assigned_users(self, obj):
-        return ", ".join([u.username for u in obj.assigned_to.all()])
+        return ", ".join([u.user.username for u in obj.assigned_to.all()])
     get_assigned_users.short_description = "Assigned Users"
