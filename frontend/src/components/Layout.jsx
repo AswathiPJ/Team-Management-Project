@@ -1,14 +1,12 @@
-import { Outlet } from 'react-router-dom';
-import Navbar from './Navbar';
+import { Outlet } from "react-router-dom";
+import Sidebar from "./Sidebar/Sidebar";
 
 const Layout = () => {
   return (
-    <div>
-      <Navbar />
-      <main>
-        <Outlet />
-      </main>
-    </div>
+    <main className="grid gap-4 p-4 grid-cols-[220px,_1fr]">
+      <Sidebar />
+      <Outlet />
+    </main>
   );
 };
 
