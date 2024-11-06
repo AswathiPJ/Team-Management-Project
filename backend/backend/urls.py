@@ -24,6 +24,10 @@ urlpatterns = [
     path('', include('account.urls')),
     path('', include('tasks.urls')),
     path('', include('meeting.urls')),
+    path('', include('chats.urls')),
+    path('', include('teams.urls')),
+    path('', include('projects.urls')),
+    path('', include('notes.urls')),
 ]
 
 if settings.DEBUG:

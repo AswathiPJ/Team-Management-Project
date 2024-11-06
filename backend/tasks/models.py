@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from projects.models import Project
 
 
 class Task(models.Model):
@@ -17,6 +18,7 @@ class Task(models.Model):
 
     title = models.CharField(max_length=255)
     description = models.TextField()
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='tasks')
     assigned_to = models.ManyToManyField(User, related_name='tasks')
     created_by = models.ForeignKey(User, related_name='created_tasks', on_delete=models.SET_NULL, null=True)
     status = models.CharField(

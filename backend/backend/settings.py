@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,10 +42,25 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'tasks.apps.TasksConfig',
     'meeting.apps.MeetingConfig',
+    'chats.apps.ChatsConfig',
+    'teams.apps.TeamsConfig',
+    'projects.apps.ProjectsConfig',
+    'notes.apps.NotesConfig',
     'rest_framework',
     'rest_framework_simplejwt',
-    'corsheaders'
+    'corsheaders',
+    
 ]
+
+
+ASGI_APPLICATION = 'backend.asgi.application' 
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

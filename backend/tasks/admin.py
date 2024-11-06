@@ -7,6 +7,7 @@ class TaskAdmin(admin.ModelAdmin):
         "title",
         "status",
         "priority",
+        "project",
         "due_date",
         "created_by",
         "get_assigned_users"
@@ -14,7 +15,7 @@ class TaskAdmin(admin.ModelAdmin):
     
     list_filter = ("status", "priority", "created_by")
     
-    search_fields = ("title", "description")
+    search_fields = ("title", "description","project")
     
     date_hierarchy = "due_date"
     
