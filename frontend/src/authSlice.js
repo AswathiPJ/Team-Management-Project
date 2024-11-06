@@ -5,7 +5,8 @@ import Cookies from 'js-cookie'
 const initialState = {
     token: Cookies.get("token") || null,
     refreshToken: Cookies.get("refreshToken") || null,
-    profile: Cookies.get("profile") || null,
+    username: Cookies.get("username") || null,
+    email: Cookies.get("email") || null,
     status: Cookies.get("status") || 'idle',
     error: null
 }
@@ -33,12 +34,14 @@ export const authSlice = createSlice({
         logout: (state) => {
             state.token = null;
             state.refreshToken = null;
-            state.profile = null;
+            state.username = null;
+            state.email = null;
             state.status = 'idle';
             state.error = null;
             Cookies.remove('token')
             Cookies.remove('refreshToken')
-            // Cookies.remove('profile')
+            Cookies.remove('username')
+            Cookies.remove('email')
             Cookies.remove('status')
         },
     },
@@ -55,10 +58,12 @@ export const authSlice = createSlice({
                 state.status = 'succeeded';
                 state.token = action.payload.access;
                 state.refreshToken = action.payload.refresh;
-                state.profile = action.payload.profile;
+                state.username = action.payload.profile.username;
+                state.email = action.payload.profile.email
                 Cookies.set('token', action.payload.access)
                 Cookies.set('refreshToken', action.payload.refresh)
-                // Cookies.set('profile', action.payload.profile)
+                Cookies.set('username', action.payload.profile.username)
+                Cookies.set('email', action.payload.profile.email)
                 Cookies.set('status', "succeeded")
             })
             .addCase(login.rejected, (state, action) => {

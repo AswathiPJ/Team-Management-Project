@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../authSlice";
+import { TopBar } from "../components/Dashboard/TopBar";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -24,24 +25,25 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className="bg-white rounded-lg pb-4 shadow">
+      <TopBar />
       <div
         className={`card ${
-          error ? "bg-error" : "bg-primary"
-        } w-96 m-6 text-base font-medium`}
+          error ? "bg-red-400" : "bg-violet-400"
+        } w-96 m-4 text-base font-medium rounded`}
       >
-        <div className="card-body">
+        <div className="card-body p-3">
           {error ? (
             <p>{error}</p>
           ) : (
-            <p>Please use the following form to log-in.</p>
+            <p className="text-sm">Please use the following form to Sign In.</p>
           )}
         </div>
       </div>
 
-      <div className="container w-96 m-6">
+      <div className="w-96 m-4 rounded">
         <form onSubmit={handleLogin}>
-          <label className="input input-bordered flex items-center gap-2 my-4">
+          <label className="input input-bordered rounded flex items-center gap-2 my-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -56,9 +58,10 @@ const Login = () => {
               placeholder="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              required
             />
           </label>
-          <label className="input input-bordered flex items-center gap-2 my-4">
+          <label className="input input-bordered rounded flex items-center gap-2 my-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -80,16 +83,16 @@ const Login = () => {
               required
             />
           </label>
-          <button className="btn btn-primary" type="submit">
+          <button className="btn bg-violet-400 rounded p-0 text-sm" type="submit">
             {status === "loading" ? (
-              <span className="loading loading-dots loading-md"></span>
+              <span className="loading loading-dots loading-md mx-4"></span>
             ) : (
-              "Login"
+              <span className="mx-4">Login</span>
             )}
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 
