@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from .models import Note
 
 class NoteSerializer(serializers.ModelSerializer):
-    user= serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    user= serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Note

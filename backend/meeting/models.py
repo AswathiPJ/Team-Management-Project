@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from account.models import Profile
 from django.utils import timezone
 import pytz
 
@@ -10,8 +11,8 @@ class Meeting(models.Model):
     date = models.DateField()
     start_time = models.TimeField()
     duration = models.PositiveIntegerField()
-    participants = models.ManyToManyField(User, related_name='meetings')
-    organizer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='organized_meetings')
+    participants = models.ManyToManyField(Profile, related_name='meetings')
+    organizer = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='organized_meetings')
     meeting_link = models.CharField(max_length=255)
     timezone = models.CharField(
         max_length=50,

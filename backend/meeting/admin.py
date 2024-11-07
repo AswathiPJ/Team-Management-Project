@@ -21,5 +21,5 @@ class MeetingAdmin(admin.ModelAdmin):
     date_hierarchy = "date"
     
     def get_participants(self, obj):
-        return ", ".join([u.username for u in obj.participants.all()])
+        return ", ".join([u.user.username for u in obj.participants.all()])
     get_participants.short_description = "Participants"

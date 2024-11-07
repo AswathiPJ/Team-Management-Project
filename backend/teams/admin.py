@@ -22,6 +22,6 @@ class TeamAdmin(admin.ModelAdmin):
     date_hierarchy = "created_on"
     
     def get_assigned_users(self, obj):
-        return ", ".join([u.username for u in obj.members.all()])
+        return ", ".join([u.user.username for u in obj.members.all()])
     get_assigned_users.short_description = "Members"
 

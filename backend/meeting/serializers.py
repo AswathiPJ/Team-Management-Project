@@ -3,8 +3,8 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 
 class MeetingSerializer(serializers.ModelSerializer):
-    participants = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
-    organizer = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    participants = serializers.PrimaryKeyRelatedField(many=True,read_only=True)
+    organizer = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Meeting
