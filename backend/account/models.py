@@ -22,7 +22,6 @@ class Profile(models.Model):
     address = models.CharField(max_length=100)
     designation = models.CharField(max_length=30, choices=DESIGNATION_CHOICES)
     joining_date = models.DateField()
-    phone_number = models
     timezone = models.CharField(
         max_length=50,
         choices=[(tz, tz) for tz in pytz.all_timezones],
