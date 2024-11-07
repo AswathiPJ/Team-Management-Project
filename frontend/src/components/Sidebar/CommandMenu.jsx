@@ -1,6 +1,7 @@
 import { Command } from "cmdk";
 import { useEffect, useState } from "react";
 import { FiEye, FiLink, FiLogOut, FiPhone, FiPlus } from "react-icons/fi";
+import PropTypes from "prop-types";
 
 export const CommandMenu = ({ open, setOpen }) => {
   const [value, setValue] = useState("");
@@ -15,7 +16,7 @@ export const CommandMenu = ({ open, setOpen }) => {
 
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
-  }, []);
+  });
 
   return (
     <Command.Dialog
@@ -70,4 +71,9 @@ export const CommandMenu = ({ open, setOpen }) => {
       </div>
     </Command.Dialog>
   );
+};
+
+CommandMenu.propTypes = {
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
 };

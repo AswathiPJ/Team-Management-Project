@@ -8,12 +8,12 @@ export const ProjectCard = ({ items }) => {
               <img
                 width="64"
                 height="64"
-                src="https://api.dicebear.com/9.x/notionists/svg"
+                src={`https://ui-avatars.com/api/?background=random&name=${project.title}`}
                 alt="checklist--v2"
                 className="size-8 rounded shrink-0 shadow bg-violet-500 m-1"
               />
               <div className="text-start">
-                <span className="text-lg font-semibold block">
+                <span className="text-sm font-semibold block">
                   {project.title}
                 </span>
                 <span className="text-xs block">

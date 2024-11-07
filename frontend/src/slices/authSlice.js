@@ -6,6 +6,7 @@ const initialState = {
     token: Cookies.get("token") || null,
     refreshToken: Cookies.get("refreshToken") || null,
     username: Cookies.get("username") || null,
+    userid: Cookies.get("userid") || null,
     email: Cookies.get("email") || null,
     status: Cookies.get("status") || 'idle',
     error: null
@@ -17,10 +18,10 @@ export const login = createAsyncThunk('auth/login', async (credentials, { reject
         return response.data;
     } catch (error) {
         if (error.response && error.response.data) {
-            console.log("rejected with value (detail)")
+            console.log(`rejected with value ${error.response.data.detail}`);
             return rejectWithValue(error.response.data.detail);
         } else {
-            console.log("rejected with value (network error)")
+            console.log("rejected with value network error")
             return rejectWithValue({ error: 'Network error' });
         }
     }
@@ -36,6 +37,7 @@ export const authSlice = createSlice({
             state.refreshToken = null;
             state.username = null;
             state.email = null;
+            state.userid = null;
             state.status = 'idle';
             state.error = null;
             Cookies.remove('token')
@@ -43,6 +45,7 @@ export const authSlice = createSlice({
             Cookies.remove('username')
             Cookies.remove('email')
             Cookies.remove('status')
+            Cookies.remove('userid')
         },
     },
     extraReducers: (builder) => {
@@ -59,17 +62,19 @@ export const authSlice = createSlice({
                 state.token = action.payload.access;
                 state.refreshToken = action.payload.refresh;
                 state.username = action.payload.profile.username;
+                state.userid = action.payload.profile.id;
                 state.email = action.payload.profile.email
                 Cookies.set('token', action.payload.access)
                 Cookies.set('refreshToken', action.payload.refresh)
                 Cookies.set('username', action.payload.profile.username)
+                Cookies.set('userid', action.payload.profile.id)
                 Cookies.set('email', action.payload.profile.email)
                 Cookies.set('status', "succeeded")
             })
             .addCase(login.rejected, (state, action) => {
                 console.log("Login call got rejected.")
-                state.status = 'failed';
                 console.log(action.payload)
+                state.status = 'failed';
                 state.error = action.payload || 'Failed to login';
             });
     },

@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export const CardTitle = ({ title, Icon, action }) => {
   return (
     <div className="border-b-2 border-dashed m-2 pb-2 border-gray-300">
@@ -18,4 +20,10 @@ export const CardTitle = ({ title, Icon, action }) => {
       </div>
     </div>
   );
+};
+
+CardTitle.propTypes = {
+  title: PropTypes.string.isRequired,
+  Icon: PropTypes.elementType,
+  action: PropTypes.string
 };

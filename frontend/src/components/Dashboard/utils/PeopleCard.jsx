@@ -11,7 +11,7 @@ export const PeopleCard = ({ items }) => {
           >
             <figure className="mt-2">
               <img
-                src={person.photo}
+                src={`https://ui-avatars.com/api/?background=random&name=${person.name}`}
                 alt="avatar"
                 className="rounded-full size-10 bg-slate-600"
               />

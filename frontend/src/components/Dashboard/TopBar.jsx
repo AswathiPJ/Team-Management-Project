@@ -20,20 +20,6 @@ export const TopBar = () => {
 
   const status = useSelector((state) => state.auth.status);
   const username = useSelector((state) => state.auth.username);
-  // console.log(JSON.parse(profile).username);
-
-  // const handleClickOutside = (event) => {
-  //   if (!menuRef.current || !menuRef.current.contains(event.target)) {
-  //     setIsMenuOpen(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, []);
 
   return (
     <div className="px-4 mb-4 mt-2 pb-4">

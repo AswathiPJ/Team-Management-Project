@@ -12,7 +12,7 @@ const AccountToggle = () => {
           <img
             width="64"
             height="64"
-            src="https://api.dicebear.com/9.x/notionists/svg"
+            src={`https://ui-avatars.com/api/?background=random&name=${username}`}
             alt="checklist--v2"
             className="size-8 rounded shrink-0 shadow bg-violet-500"
           />
