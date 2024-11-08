@@ -13,11 +13,11 @@ export const Projects = () => {
   ]
 
   return (
-    <div className="col-span-6 rounded border h-80">
+    <div className="col-span-6 rounded border h-72">
       <CardTitle title={`Projects (${projects.length})`} Icon={MdOutlineSort} action="Sort" />
       <ProjectCard items={projects} />
-      <div className="m-2 mt-6">
-        <button className="text-sm bg-stone-100 transition-colors hover:bg-violet-100 p-1.5 rounded w-full">
+      <div className="m-2 mt-2.5">
+        <button className="text-sm bg-stone-100 transition-colors hover:bg-violet-100 p-1.5 rounded w-full shadow">
           Show All
         </button>
       </div>

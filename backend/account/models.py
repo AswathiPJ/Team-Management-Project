@@ -27,12 +27,6 @@ class Profile(models.Model):
         choices=[(tz, tz) for tz in pytz.all_timezones],
         default='UTC'
     )
-    photo = models.ImageField(
-        upload_to='users/%Y/%m/%d/',
-        blank=True,
-        null=True,
-        default=f'user_default.png'
-    )
     contact_no = models.CharField(max_length=15)
 
     def __str__(self):

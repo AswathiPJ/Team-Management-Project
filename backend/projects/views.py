@@ -15,7 +15,6 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user_id = self.request.query_params.get('user')
-        print(user_id)
         if user_id:
             user_id = int(user_id)
             user=Profile.objects.filter(id=user_id)

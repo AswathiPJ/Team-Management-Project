@@ -3,6 +3,8 @@ import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Layout from "./components/Layout";
 import Dashboard from "./components/Dashboard/Dashboard";
+import { TaskDetailedView } from "./pages/TaskDetailedView";
+import { PersonDetailedView } from "./pages/PersonDetailedView";
 
 const router = createBrowserRouter([
   {
@@ -11,7 +13,9 @@ const router = createBrowserRouter([
     children: [
       { path: "", element: <Dashboard /> },
       { path: "/login", element: <Login /> },
-      { path: "/logout", element: <Logout />},
+      { path: "/logout", element: <Logout /> },
+      { path: "/task/:taskId", element: <TaskDetailedView /> },
+      { path: "/person/:userId", element: <PersonDetailedView /> }
     ],
   },
 ]);

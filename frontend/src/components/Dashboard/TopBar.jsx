@@ -6,16 +6,47 @@ import {
   MdHelpOutline,
   MdOutlineFeedback,
 } from "react-icons/md";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export const TopBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [dateAndTime, setDateAndTime] = useState(new Date())
   const menuRef = useRef(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDateAndTime(new Date());
+    }, 30000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatDate = (dateObj) => {
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    let dayIndex = dateObj.getDay();
+    let monthIndex = dateObj.getMonth();
+
+    return `${daysOfWeek[dayIndex]}, ${months[monthIndex]} ${dateObj.getDate()}th`;
+  };
+
+  const formatTime = (timeObj) => {
+    const hours = timeObj.getHours().toString().padStart(2, '0');
+    const minutes = timeObj.getMinutes().toString().padStart(2, '0');
+
+    return `${hours}:${minutes} ${timeObj.getHours() >= 12 ? 'PM' : 'AM'}`;
+  };
+
+  const formattedDateAndTime = () => {
+    const now = new Date(dateAndTime);
+    return `${formatDate(now)} ${formatTime(now)}`;
   };
 
   const status = useSelector((state) => state.auth.status);
@@ -31,12 +62,12 @@ export const TopBar = () => {
                 🚀 Good morning, {username}
               </span>
               <span className="text-xs block text-stone-500">
-                Tuesday, Aug 8th 2023
+                {formattedDateAndTime()}
               </span>
             </>
           ) : (
             <span className="text-xs block text-stone-500">
-              Tuesday, Aug 8th 2023
+              {formattedDateAndTime()}
             </span>
           )}
         </div>

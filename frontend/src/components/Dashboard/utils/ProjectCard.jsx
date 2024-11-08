@@ -10,7 +10,7 @@ export const ProjectCard = ({ items }) => {
                 height="64"
                 src={`https://ui-avatars.com/api/?background=random&name=${project.title}`}
                 alt="checklist--v2"
-                className="size-8 rounded shrink-0 shadow bg-violet-500 m-1"
+                className="size-8 rounded shrink-0 shadow m-1"
               />
               <div className="text-start">
                 <span className="text-sm font-semibold block">
