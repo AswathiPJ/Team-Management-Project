@@ -3,5 +3,5 @@ from django.contrib.auth.models import User
 from account.models import Profile
 
 class Note(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    userid = models.CharField(max_length=10)
     content= models.TextField()

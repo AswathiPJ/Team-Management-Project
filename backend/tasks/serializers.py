@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from . import models
+from account.serializers import ProfileSerializer
+
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -15,6 +17,17 @@ class TaskSerializer(serializers.ModelSerializer):
             'id': project_id,
             'title': project_title
         }
+
+        # userid = instance.assigned_to.id if instance.assigned_to else None
+        # username = instance.assigned_to.username if instance.assigned_to else None
+        # data['assigned_to'] = {
+        #     'id': userid,
+        #     'username':username
+        # }
+
+        profile_serializer = ProfileSerializer(instance.assigned_to, many=True)
+        data['assigned_to'] = profile_serializer.data
+
         return data
 
     class Meta:
