@@ -23,7 +23,7 @@ export const getNotes = createAsyncThunk(
     console.log(`user id used for fetching notes: ${userId}`);
     try {
       const response = await axios.get(
-        `http://localhost:8000/notes/?userid=${userId}`
+        `http://localhost:8000/notes/?user=${userId}`
       );
       return response.data;
     } catch (error) {
@@ -70,6 +70,7 @@ const noteSlice = createSlice({
       })
       .addCase(getNotes.fulfilled, (state, action) => {
         console.log("fetched notes successfully");
+        console.log(action.payload);
         state.notes = action.payload;
         state.getNotesStatus = "success";
       })
