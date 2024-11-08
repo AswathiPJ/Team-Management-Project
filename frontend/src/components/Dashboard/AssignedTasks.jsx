@@ -26,7 +26,7 @@ export const AssignedTasks = () => {
       { tasks.length > 3 && (
         <div className="m-2">
           <button className="text-sm bg-stone-100 transition-colors shadow hover:bg-violet-100 p-1.5 rounded w-full">
-            Show All
+            {`Show All (${tasks.length})`}
           </button>
         </div>
       )}

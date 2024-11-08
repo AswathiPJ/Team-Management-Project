@@ -47,7 +47,7 @@ export const PeopleCard = ({ persons }) => {
               </figure>
               <div className="card-body items-center text-center p-0">
                 <span className="text-sm font-medium leading-none pt-1.5">
-                  View All
+                  {`Show All (${persons.length})`}
                 </span>
               </div>
             </div>

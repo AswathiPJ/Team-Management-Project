@@ -22,7 +22,7 @@ export const Projects = () => {
       { projects.length > 8 && (
         <div className="m-2">
           <button className="text-sm bg-stone-100 transition-colors shadow hover:bg-violet-100 p-1.5 rounded w-full mt-3">
-            Show All
+          {`Show All (${projects.length})`}
           </button>
         </div>
       )}
