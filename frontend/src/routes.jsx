@@ -6,6 +6,11 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import { TaskDetailedView } from "./pages/TaskDetailedView";
 import { PersonDetailedView } from "./pages/PersonDetailedView";
 import NotesVeiw from "./pages/NotesView";
+import TasksView from "./pages/TasksView";
+import InboxView from "./pages/InboxView";
+import PeoplesView from "./pages/PeoplesView";
+import MessagesView from "./pages/MessagesView";
+import CalendarView from "./pages/CalendarView";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +20,12 @@ const router = createBrowserRouter([
       { path: "", element: <Dashboard /> },
       { path: "/login", element: <Login /> },
       { path: "/logout", element: <Logout /> },
+      { path: "/tasks", element: <TasksView/> },
+      { path: "/inbox", element: <InboxView/> },
+      { path: "/peoples", element: <PeoplesView/> },
+      { path: "/messages", element: <MessagesView/> },
       { path: "/notes", element: <NotesVeiw /> },
+      { path: "/calendar", element: <CalendarView/> },
       { path: "/task/:taskId", element: <TaskDetailedView /> },
       { path: "/person/:userId", element: <PersonDetailedView /> }
     ],
