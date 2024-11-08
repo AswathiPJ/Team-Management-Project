@@ -60,14 +60,29 @@ TaskCard.propTypes = {
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
       }).isRequired,
-      assigned_to: PropTypes.arrayOf(PropTypes.number),
+      assigned_to: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          username: PropTypes.string,
+          email: PropTypes.string.isRequired,
+          first_name: PropTypes.string,
+          last_name: PropTypes.string,
+          date_of_birth: PropTypes.string,
+          address: PropTypes.string,
+          designation: PropTypes.string,
+          joining_date: PropTypes.string,
+          timezone: PropTypes.string,
+          contact_no: PropTypes.string,
+          user: PropTypes.number,
+        })
+      ),
       created_by: PropTypes.string.isRequired,
       status: PropTypes.string.isRequired,
-      priority: PropTypes.string.isRequired,
+      priority: PropTypes.oneOf(['Low', 'Medium', 'High']).isRequired,
       due_date: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.instanceOf(Date),
-      ]),
+      ]).isRequired,
       created_at: PropTypes.string.isRequired,
       updated_at: PropTypes.string.isRequired,
     })

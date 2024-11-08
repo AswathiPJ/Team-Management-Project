@@ -16,6 +16,10 @@ export const TaskDetailedView = () => {
     dispatch(fetchSelectedTask(taskId));
   }, [dispatch, taskId]);
 
+  const getAssignedUserNames = () => {
+    return selectedTask.assigned_to.map((user) => user.username).join(", ");
+  };
+
   return (
     <div className="bg-white rounded-lg pb-4 shadow">
       <TopBar />
@@ -27,6 +31,14 @@ export const TaskDetailedView = () => {
           <h1>{`Priority: ${selectedTask.priority}`}</h1>
           <h1>{`Project: ${selectedTask.project.title}`}</h1>
           <h1>{`status: ${selectedTask.status}`}</h1>
+          <h2>Assigned Users:</h2>
+          <ul>
+            {getAssignedUserNames()
+              .split(",")
+              .map((userName, index) => (
+                <li key={index}>{userName}</li>
+              ))}
+          </ul>
         </>
       ) : (
         <div className="flex justify-center items-center h-48">
