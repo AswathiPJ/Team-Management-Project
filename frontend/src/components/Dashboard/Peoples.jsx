@@ -9,7 +9,6 @@ export const Peoples = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("inside useeffect")
     dispatch(fetchProfiles());
   }, [dispatch]);
 
