@@ -53,7 +53,7 @@ const initialState = {
   postError: null,
   getNotesStatus: "idle",
   getNotesError: null,
-  getSelectedNote: null,
+  selectedNote: null,
   getSelectedNoteStatus: "idle",
   getSelectedNoteError: null,
 };
@@ -104,7 +104,7 @@ const noteSlice = createSlice({
       .addCase(getSelectedNote.fulfilled, (state, action) => {
         console.log("Fetched selected note successfully");
         console.log(action.payload);
-        state.getSelectedNote = action.payload;
+        state.selectedNote = action.payload;
         state.getSelectedNoteStatus = "success";
       })
       .addCase(getSelectedNote.rejected, (state, action) => {
