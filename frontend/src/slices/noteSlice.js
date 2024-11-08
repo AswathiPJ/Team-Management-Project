@@ -33,6 +33,19 @@ export const getNotes = createAsyncThunk(
   }
 );
 
+export const getSelectedNote = createAsyncThunk(
+  "notes/getSelectedNote",
+  async(noteId, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`http://localhost:8000/notes/${noteId}`);
+      return response.data;
+    } catch (error) {
+      console.log(`Rejected with value ${error.response?.data?.detail}`);
+      return rejectWithValue(error.response?.data?.detail || { error: "Network error" });
+    }
+  }
+)
+
 const initialState = {
   notes: [],
   error: null,
@@ -40,6 +53,9 @@ const initialState = {
   postError: null,
   getNotesStatus: "idle",
   getNotesError: null,
+  getSelectedNote: null,
+  getSelectedNoteStatus: "idle",
+  getSelectedNoteError: null,
 };
 
 const noteSlice = createSlice({
@@ -79,6 +95,23 @@ const noteSlice = createSlice({
         console.log(action.payload);
         state.getNotesError = action.error.message;
         state.getNotesStatus = "failed";
+      });
+      builder
+      .addCase(getSelectedNote.pending, (state) => {
+        console.log("Fetching selected note...");
+        state.getSelectedNoteStatus = "loading";
+      })
+      .addCase(getSelectedNote.fulfilled, (state, action) => {
+        console.log("Fetched selected note successfully");
+        console.log(action.payload);
+        state.getSelectedNote = action.payload;
+        state.getSelectedNoteStatus = "success";
+      })
+      .addCase(getSelectedNote.rejected, (state, action) => {
+        console.log("Failed to fetch selected note");
+        console.log(action.payload);
+        state.getSelectedNoteError = action.error.message;
+        state.getSelectedNoteStatus = "failed";
       });
   },
 });
