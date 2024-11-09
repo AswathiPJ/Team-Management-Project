@@ -15,21 +15,21 @@ export const PeopleCard = ({ persons }) => {
     <>
       {profileFetchStatus === "loading" ? (
         <div className="flex justify-center items-center h-52">
-          <span className="text-center loading loading-infinity loading-lg"></span>
+          <span className="text-center loading loading-bars loading-lg"></span>
         </div>
       ) : persons.length > 0 ? (
         <div className="grid grid-cols-3 gap-4 m-2">
-          {persons.map((person) => (
+          {persons.slice(0, 5).map((person) => (
             <div
               key={person.id}
               onClick={() => handleProfileView(person.id)}
-              className="card bg-base-100 w-36 h-24 shadow-md rounded cursor-pointer transition-colors hover:bg-green-300"
+              className="card bg-base-100 w-36 h-24 shadow-md rounded-lg cursor-pointer transition-colors hover:bg-green-300"
             >
               <figure className="mt-2">
                 <img
                   src={`https://ui-avatars.com/api/?background=random&name=${person.username}`}
                   alt="avatar"
-                  className="rounded size-10 shadow"
+                  className="rounded-lg size-10 shadow"
                 />
               </figure>
               <div className="card-body items-center text-center p-0">
@@ -41,8 +41,8 @@ export const PeopleCard = ({ persons }) => {
             </div>
           ))}
           {persons.length > 5 && (
-            <div className="card bg-base-100 w-36 h-32 shadow-md rounded cursor-pointer">
-              <figure className="mt-10">
+            <div className="card bg-base-100 w-36 h-24 shadow-md rounded-lg cursor-pointer transition-colors hover:bg-green-300">
+              <figure className="mt-6">
                 <IoIosMore />
               </figure>
               <div className="card-body items-center text-center p-0">

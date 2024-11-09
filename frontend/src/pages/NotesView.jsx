@@ -25,7 +25,7 @@ const NotesView = () => {
       <TopBar />
       {getNotesStatus === "loading" ? (
         <div className="flex justify-center items-center h-48">
-          <span className="text-center loading loading-infinity loading-lg"></span>
+          <span className="text-center loading loading-bars loading-lg"></span>
         </div>
       ) : (
         <>

@@ -23,7 +23,7 @@ const TasksView = () => {
     <div className="bg-white rounded-lg pb-4 shadow">
       <TopBar />
       {tasks.map((task) => (
-        <div key={task.id} className="m-4 border-2" onClick={() => handleTaskView(task.id)}>
+        <div key={task.id} className="m-4 border-2 cursor-pointer" onClick={() => handleTaskView(task.id)}>
           <p>{task.title}</p>
           <p>{task.description}</p>
           <p>{task.priority}</p>

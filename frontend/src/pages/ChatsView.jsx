@@ -1,13 +1,12 @@
-import React from 'react'
 import { TopBar } from '../components/Dashboard/TopBar'
 
-function MessagesView() {
+function ChatsView() {
   return (
     <div className="bg-white rounded-lg pb-4 shadow">
           <TopBar />
-            <h1>Calendar View</h1>
+            <h1>Chats View</h1>
         </div>
   )
 }
 
-export default MessagesView
+export default ChatsView

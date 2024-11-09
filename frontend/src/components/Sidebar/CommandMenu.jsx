@@ -42,28 +42,28 @@ export const CommandMenu = ({ open, setOpen }) => {
             <span className="text-violet-500">{value}</span>
           </Command.Empty>
           <Command.Group heading="Team" className="text-sm mb-3 text-stone-400">
-            <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 hover:bg-stone-200 rounded items-center gap-2">
+            <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 hover:bg-stone-200 rounded-lg items-center gap-2">
                 <FiPlus />
                 Invite Member
             </Command.Item>
-            <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 hover:bg-stone-200 rounded items-center gap-2">
+            <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 hover:bg-stone-200 rounded-lg items-center gap-2">
                 <FiEye />
                 See Org Chart
             </Command.Item>
           </Command.Group>
 
           <Command.Group heading="Team" className="text-sm mb-3 text-stone-400">
-            <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 hover:bg-stone-200 rounded items-center gap-2">
+            <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 hover:bg-stone-200 rounded-lg items-center gap-2">
                 <FiLink />
                 Link Services
             </Command.Item>
-            <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 hover:bg-stone-200 rounded items-center gap-2">
+            <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 hover:bg-stone-200 rounded-lg items-center gap-2">
                 <FiPhone />
                 Contact Support
             </Command.Item>
           </Command.Group>
 
-          <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-50 hover:bg-stone-700 bg-stone-950 rounded items-center gap-2">
+          <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-50 hover:bg-stone-700 bg-stone-950 rounded-lg items-center gap-2">
                 <FiLogOut />
                 Sign Out
             </Command.Item>

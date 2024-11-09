@@ -8,9 +8,10 @@ import { PersonDetailedView } from "./pages/PersonDetailedView";
 import NoteDetailedView from "./pages/NoteDetailedView";
 import NotesVeiw from "./pages/NotesView";
 import TasksView from "./pages/TasksView";
-import InboxView from "./pages/InboxView";
+import ProjectsView from "./pages/ProjectsView";
+// import InboxView from "./pages/InboxView";
 import PeoplesView from "./pages/PeoplesView";
-import MessagesView from "./pages/MessagesView";
+import ChatsView from "./pages/ChatsView";
 import CalendarView from "./pages/CalendarView";
 
 const router = createBrowserRouter([
@@ -22,9 +23,10 @@ const router = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/logout", element: <Logout /> },
       { path: "/tasks", element: <TasksView/> },
-      { path: "/inbox", element: <InboxView/> },
+      // { path: "/inbox", element: <InboxView/> },
+      { path: "/projects", element: <ProjectsView /> },
       { path: "/peoples", element: <PeoplesView/> },
-      { path: "/messages", element: <MessagesView/> },
+      { path: "/chats", element: <ChatsView/> },
       { path: "/notes", element: <NotesVeiw /> },
       { path: "/calendar", element: <CalendarView/> },
       { path: "/note/:noteId", element: <NoteDetailedView /> },

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { CardTitle } from "./utils/CardTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { postNote } from "../../slices/noteSlice";
+import toast from "react-hot-toast";
 
 export const Notes = () => {
   const dispatch = useDispatch();
@@ -18,13 +19,14 @@ export const Notes = () => {
 
   useEffect(() => {
     if (notePostStatus === "succeeded") {
+      toast.success("saved")
       setNoteContent("");
     }
   }, [notePostStatus])
 
   return (
     <>
-      <div className="col-span-6 rounded border flex flex-col h-full bg-stone-200">
+      <div className="col-span-6 rounded-lg border flex flex-col h-full bg-stone-200">
         <CardTitle title="Private Notepad" />
         <div className="m-2 flex-grow">
           <textarea
@@ -36,7 +38,7 @@ export const Notes = () => {
         </div>
         <div className="h-10 m-2 flex-shrink-0">
           <button
-            className="text-sm bg-stone-100 transition-colors hover:bg-green-400 p-1.5 rounded w-full"
+            className="text-sm bg-stone-100 transition-colors hover:bg-green-400 p-1.5 rounded-lg w-full"
             onClick={handleSave}
           >
             Save

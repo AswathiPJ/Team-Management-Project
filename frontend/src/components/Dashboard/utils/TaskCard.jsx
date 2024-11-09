@@ -15,13 +15,13 @@ export const TaskCard = ({ tasks }) => {
     <>
       {taskFetchStatus === "loading" ? (
         <div className="flex justify-center items-center h-52">
-          <span className="text-center loading loading-infinity loading-lg"></span>
+          <span className="text-center loading loading-bars loading-lg"></span>
         </div>
       ) : tasks.length > 0 ? (
         tasks.map((task) => (
           <div
             key={task.id}
-            className="bg-white rounded shadow-md m-2"
+            className="bg-white rounded-lg shadow-md m-2"
           >
             <div className="grid grid-cols-1 transition-colors hover:bg-green-300  cursor-pointer" onClick={() => handleTaskView(task.id)}>
               <span className="text-sm font-bold text-gray-800 mx-2 my-1.5">

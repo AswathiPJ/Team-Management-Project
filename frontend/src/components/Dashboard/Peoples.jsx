@@ -13,9 +13,9 @@ export const Peoples = () => {
   }, [dispatch]);
 
   return (
-    <div className="col-span-6 rounded border h-72">
+    <div className="col-span-6 rounded-lg border h-72">
       <CardTitle title={`Peoples (${profiles.length})`} />
-      <PeopleCard persons={profiles.slice(0, 5)} />
+      <PeopleCard persons={profiles} />
     </div>
   );
 };

@@ -35,14 +35,14 @@ export const ProjectCard = ({ projects }) => {
     <>
       <div className="grid grid-cols-2">
         {projects.map((project) => (
-          <div key={project.id} className="mx-2 my-1 border rounded">
-            <button className="flex p-0.5 hover:bg-stone-200 rounded transition-colors relative gap-2 w-full items-center">
+          <div key={project.id} className="mx-2 my-1 border rounded-lg">
+            <button className="flex p-0.5 hover:bg-stone-200 rounded-lg transition-colors relative gap-2 w-full items-center">
               <img
                 width="64"
                 height="64"
                 src={`https://ui-avatars.com/api/?background=random&name=${project.name}`}
                 alt="checklist--v2"
-                className="size-8 rounded shrink-0 shadow m-1"
+                className="size-8 rounded-lg shrink-0 shadow m-1"
               />
               <div className="text-start">
                 <span className="text-sm font-semibold block">

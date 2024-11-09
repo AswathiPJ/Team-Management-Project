@@ -9,10 +9,11 @@ import {
 import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 export const TopBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [dateAndTime, setDateAndTime] = useState(new Date())
+  const [dateAndTime, setDateAndTime] = useState(new Date());
   const menuRef = useRef(null);
 
   const toggleMenu = () => {
@@ -27,9 +28,41 @@ export const TopBar = () => {
     return () => clearInterval(timer);
   }, []);
 
+  const getGreetingMessage = (currentTime) => {
+    const hour = currentTime.getHours();
+    if (hour < 12) {
+      return "Morning";
+    } else if (hour < 18) {
+      return "Afternoon";
+    } else {
+      return "Evening";
+    }
+  };
+
   const formatDate = (dateObj) => {
-    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const daysOfWeek = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
 
     let dayIndex = dateObj.getDay();
     let monthIndex = dateObj.getMonth();
@@ -38,10 +71,10 @@ export const TopBar = () => {
   };
 
   const formatTime = (timeObj) => {
-    const hours = timeObj.getHours().toString().padStart(2, '0');
-    const minutes = timeObj.getMinutes().toString().padStart(2, '0');
+    const hours = timeObj.getHours().toString().padStart(2, "0");
+    const minutes = timeObj.getMinutes().toString().padStart(2, "0");
 
-    return `${hours}:${minutes} ${timeObj.getHours() >= 12 ? 'PM' : 'AM'}`;
+    return `${hours}:${minutes} ${timeObj.getHours() >= 12 ? "PM" : "AM"}`;
   };
 
   const formattedDateAndTime = () => {
@@ -59,23 +92,26 @@ export const TopBar = () => {
           {status === "succeeded" ? (
             <>
               <span className="text-sm font-bold block">
-                🚀 Good morning, {username}
+                🚀 Good {getGreetingMessage(new Date())}, {username}
               </span>
               <span className="text-xs block text-stone-500">
                 {formattedDateAndTime()}
               </span>
             </>
           ) : (
-            <span className="text-xs block text-stone-500">
-              {formattedDateAndTime()}
-            </span>
+            <>
+              <span className="text-sm font-bold block">Not Signed In</span>
+              <span className="text-xs block text-stone-500">
+                {formattedDateAndTime()}
+              </span>
+            </>
           )}
         </div>
-
+        {/* <Toaster className="mt-2" /> */}
         <button
           className={`flex text-sm items-center gap-2 ${
             isMenuOpen ? "bg-violet-100" : "bg-stone-100"
-          } transition-colors hover:bg-violet-100 px-3 py-1.5 rounded`}
+          } transition-colors hover:bg-violet-100 px-3 py-1.5 rounded-lg`}
           onClick={toggleMenu}
         >
           <MdOutlineSettings />
@@ -85,11 +121,11 @@ export const TopBar = () => {
 
         {isMenuOpen && (
           <div ref={menuRef} className="absolute top-9 right-0 m-8 z-50 ">
-            <ul className="menu bg-base-200 rounded w-56">
+            <ul className="menu bg-base-200 rounded-lg w-56">
               <li>
                 <a
                   href="#"
-                  className="flex text-sm items-center gap-2 transition-colors px-3 py-1.5 rounded"
+                  className="flex text-sm items-center gap-2 transition-colors px-3 py-1.5 rounded-lg"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <CgProfile />
@@ -99,7 +135,7 @@ export const TopBar = () => {
               <li>
                 <a
                   href="#"
-                  className="flex text-sm items-center gap-2 transition-colors px-3 py-1.5 rounded"
+                  className="flex text-sm items-center gap-2 transition-colors px-3 py-1.5 rounded-lg"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <MdHelpOutline />
@@ -109,7 +145,7 @@ export const TopBar = () => {
               <li>
                 <a
                   href="#"
-                  className="flex text-sm items-center gap-2 transition-colors px-3 py-1.5 rounded"
+                  className="flex text-sm items-center gap-2 transition-colors px-3 py-1.5 rounded-lg"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <MdOutlineFeedback />

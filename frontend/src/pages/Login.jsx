@@ -30,7 +30,7 @@ const Login = () => {
       <div
         className={`card ${
           error ? "bg-red-400" : "bg-violet-400"
-        } w-96 m-4 text-base font-medium rounded`}
+        } w-96 m-4 text-base font-medium rounded-lg`}
       >
         <div className="card-body p-3">
           {error ? (
@@ -41,9 +41,9 @@ const Login = () => {
         </div>
       </div>
 
-      <div className="w-96 m-4 rounded">
+      <div className="w-96 m-4 rounded-lg">
         <form onSubmit={handleLogin}>
-          <label className="input input-bordered rounded flex items-center gap-2 my-2">
+          <label className="input input-bordered rounded-lg flex items-center gap-2 my-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -61,7 +61,7 @@ const Login = () => {
               required
             />
           </label>
-          <label className="input input-bordered rounded flex items-center gap-2 my-2">
+          <label className="input input-bordered rounded-lg flex items-center gap-2 my-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -83,7 +83,8 @@ const Login = () => {
               required
             />
           </label>
-          <button className="btn bg-violet-400 rounded p-0 text-sm" type="submit">
+          {/* <button className="btn bg-violet-400 rounded-lg p-0 text-sm" type="submit"> */}
+          <button className="bg-violet-400 rounded-lg p-2.5 shadow text-sm transition-colors hover:bg-stone-400" type="submit">
             {status === "loading" ? (
               <span className="loading loading-dots loading-md mx-4"></span>
             ) : (
