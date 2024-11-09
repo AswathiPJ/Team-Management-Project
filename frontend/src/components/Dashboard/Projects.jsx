@@ -17,12 +17,22 @@ export const Projects = () => {
 
   return (
     <div className="col-span-6 rounded-lg border h-72">
-      <CardTitle title={`Projects (${projects.length})`} Icon={MdOutlineSort} action="Sort" />
-      <ProjectCard projects={projects.length > 8 ? projects.slice(0, 6) : projects} />
-      { projects.length > 8 && (
+      <CardTitle
+        title={`Projects (${projects.length})`}
+        button={
+          <button className="flex text-sm items-center gap-2 bg-stone-100 transition-colors hover:bg-violet-100 px-3 py-1.5 rounded-lg">
+            <MdOutlineSort />
+            Sort
+          </button>
+        }
+      />
+      <ProjectCard
+        projects={projects.length > 8 ? projects.slice(0, 6) : projects}
+      />
+      {projects.length > 8 && (
         <div className="m-2">
           <button className="text-sm bg-stone-100 transition-colors shadow hover:bg-violet-100 p-1.5 rounded-lg w-full mt-3">
-          {`Show All (${projects.length})`}
+            {`Show All (${projects.length})`}
           </button>
         </div>
       )}

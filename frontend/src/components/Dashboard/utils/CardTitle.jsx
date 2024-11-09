@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export const CardTitle = ({ title, Icon, action }) => {
+export const CardTitle = ({ title, button }) => {
   return (
     <div className="border-b-2 border-dashed m-2 pb-2 border-gray-300">
       <div className="flex items-center justify-between">
@@ -8,14 +8,7 @@ export const CardTitle = ({ title, Icon, action }) => {
           <span className="text-sm font-bold block">{title}</span>
         </div>
         <div>
-          {Icon && (
-            <button
-              className={`flex text-sm items-center gap-2 bg-stone-100 transition-colors hover:bg-violet-100 px-3 py-1.5 rounded-lg`}
-            >
-              <Icon />
-              {action}
-            </button>
-          )}
+          {button}
         </div>
       </div>
     </div>
@@ -24,6 +17,5 @@ export const CardTitle = ({ title, Icon, action }) => {
 
 CardTitle.propTypes = {
   title: PropTypes.string.isRequired,
-  Icon: PropTypes.elementType,
-  action: PropTypes.string
+  button: PropTypes.element
 };
