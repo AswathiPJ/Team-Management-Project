@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../slices/authSlice";
 import { TopBar } from "../components/Dashboard/TopBar";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -22,6 +23,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     dispatch(login({ username, password }));
+    toast.success("Signed In")
   };
 
   return (

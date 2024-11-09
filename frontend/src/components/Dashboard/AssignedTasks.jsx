@@ -12,7 +12,6 @@ const SORT_OPTIONS = ["All", "Pending", "In Progress", "Completed", "Overdue"];
 export const AssignedTasks = () => {
   const userId = useSelector((state) => state.auth.userid);
   const tasks = useSelector((state) => state.tasks.task_list);
-  // const [filteredTasks, setFilteredTasks] = useState(tasks);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -50,7 +49,7 @@ export const AssignedTasks = () => {
   return (
     <div className="col-span-6 rounded-lg bg-stone-200 h-72">
       <CardTitle
-        title={`Assigned Tasks (${tasks.length})`}
+        title={`Assigned Tasks (${tasks.filter((task) => task.status !== "Completed").length})`}
         button={
           <button
             onClick={handleSortClick}
@@ -68,7 +67,7 @@ export const AssignedTasks = () => {
             onClick={() => navigate(`/tasks`)}
             className="text-sm bg-stone-100 transition-colors shadow hover:bg-violet-100 p-1.5 rounded-lg w-full"
           >
-            {`Show All (${tasks.length})`}
+            {`Show All (${tasks.filter((task) => task.status !== "Completed").length}))`}
           </button>
         </div>
       )}
