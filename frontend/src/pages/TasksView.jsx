@@ -27,6 +27,7 @@ const TasksView = () => {
           <p>{task.title}</p>
           <p>{task.description}</p>
           <p>{task.priority}</p>
+          <p>{task.status}</p>
         </div>
       ))}
     </div>

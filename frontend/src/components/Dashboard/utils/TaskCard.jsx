@@ -11,6 +11,19 @@ export const TaskCard = ({ tasks }) => {
     navigate(`/task/${taskId}`)
   };
 
+  const getStatusColor = (status) => {
+    switch(status) {
+      case "Pending":
+        return "bg-red-300 hover:bg-red-400";
+      case "In Progress":
+        return "bg-yellow-200 hover:bg-yellow-300";
+      case "Completed":
+        return "bg-green-300 hover:bg-green-400";
+      default:
+        return "bg-slate-300 hover:bg-slate-400";
+    }
+  };
+
   return (
     <>
       {taskFetchStatus === "loading" ? (
@@ -23,7 +36,7 @@ export const TaskCard = ({ tasks }) => {
             key={task.id}
             className="bg-white rounded-lg shadow-md m-2"
           >
-            <div className="grid grid-cols-1 transition-colors hover:bg-green-300  cursor-pointer" onClick={() => handleTaskView(task.id)}>
+            <div className={`grid grid-cols-1 transition-colors rounded-lg ${getStatusColor(task.status)} cursor-pointer`} onClick={() => handleTaskView(task.id)}>
               <span className="text-sm font-bold text-gray-800 mx-2 my-1.5">
                 {task.title}
               </span>

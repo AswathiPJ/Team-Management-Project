@@ -23,7 +23,7 @@ export const PeopleCard = ({ persons }) => {
             <div
               key={person.id}
               onClick={() => handleProfileView(person.id)}
-              className="card bg-base-100 w-36 h-24 shadow-md rounded-lg cursor-pointer transition-colors hover:bg-green-300"
+              className="card bg-base-100 w-36 h-24 rounded-lg cursor-pointer transition-colors hover:bg-stone-300"
             >
               <figure className="mt-2">
                 <img
@@ -41,7 +41,7 @@ export const PeopleCard = ({ persons }) => {
             </div>
           ))}
           {persons.length > 5 && (
-            <div className="card bg-base-100 w-36 h-24 shadow-md rounded-lg cursor-pointer transition-colors hover:bg-green-300">
+            <div className="card bg-white w-36 h-24 rounded-lg cursor-pointer transition-colors hover:bg-stone-300">
               <figure className="mt-6">
                 <IoIosMore />
               </figure>

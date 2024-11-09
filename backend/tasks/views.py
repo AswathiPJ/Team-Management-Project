@@ -22,11 +22,3 @@ class TaskViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
-
-    def perform_update(self, serializer):
-        task = self.get_object()
-        user = self.request.user
-        if task.can_change_status(user):
-            serializer.save()
-        else:
-            raise PermissionDenied("You don't have permission to update this task status.")

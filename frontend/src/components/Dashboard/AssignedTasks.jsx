@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 export const AssignedTasks = () => {
   const userId = useSelector((state) => state.auth.userid);
   const tasks = useSelector((state) => state.tasks.task_list);
+  const filteredTasks = tasks.filter(task => task.status !== "Completed");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,8 +25,8 @@ export const AssignedTasks = () => {
         Icon={MdOutlineSort}
         action="Sort"
       />
-      <TaskCard tasks={tasks.slice(0, 3)} />
-      { tasks.length > 3 && (
+      <TaskCard tasks={filteredTasks.slice(0, 3)} />
+      { filteredTasks.length > 3 && (
         <div className="m-2">
           <button onClick={() => navigate(`/tasks`)} className="text-sm bg-stone-100 transition-colors shadow hover:bg-violet-100 p-1.5 rounded-lg w-full">
             {`Show All (${tasks.length})`}

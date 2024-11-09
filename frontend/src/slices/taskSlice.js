@@ -35,6 +35,19 @@ export const fetchSelectedTask = createAsyncThunk(
   }
 );
 
+export const updateTaskStatus = createAsyncThunk(
+  "tasks/update",
+  async ({ id, status }, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(`http://localhost:8000/tasks/${id}/`, { status });
+      return response.data;
+    } catch (error) {
+      console.log(`Rejected with value ${error.response?.data?.detail}`);
+      return rejectWithValue(error.response?.data?.detail || { error: "Network error" });
+    }
+  }
+);
+
 const initialState = {
   task_list: [],
   status: "idle",
@@ -42,6 +55,8 @@ const initialState = {
   selected_task: null,
   selected_status: "idle",
   selected_error: null,
+  status_update_status: null,
+  status_update_error: null
 };
 
 const taskSlice = createSlice({
@@ -82,6 +97,23 @@ const taskSlice = createSlice({
       console.log(action.payload)
       state.selected_error = action.error.message;
       state.selected_status = "failed";
+    });
+
+    //updating status
+    builder.addCase(updateTaskStatus.pending, (state) => {
+      console.log("Updating task status...");
+      state.status_update_status = "loading";
+    });
+    
+    builder.addCase(updateTaskStatus.fulfilled, (state) => {
+      console.log("Updated task status successfully.");
+      state.status_update_status = "succeeded";
+    });
+    
+    builder.addCase(updateTaskStatus.rejected, (state, action) => {
+      console.log("Failed to update task status.");
+      state.status_update_error = action.error.message;
+      state.status_update_status = "failed";
     });
   },
 });
