@@ -2,21 +2,24 @@ from rest_framework import serializers
 from .models import Chat, Message
 from django.contrib.auth.models import User
 from teams.models import Team
+from account.models import Profile
 
-class UserSerializer(serializers.ModelSerializer):
+class ProfileSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username')
+
     class Meta:
-        model = User
-        fields = ['id', 'username', 'email']
+        model = Profile
+        fields =['id','username']
 
 class ChatSerializer(serializers.ModelSerializer):
-    team= serializers.PrimaryKeyRelatedField(queryset=Team.objects.all(), write_only=True)
+    team= serializers.PrimaryKeyRelatedField(queryset=Team.objects.all())
 
     class Meta:
         model = Chat
-        fields = ['id', 'name', 'slug', 'team']
+        fields = ['id', 'name', 'team']
 
 class MessageSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
+    user = ProfileSerializer()
     chat= serializers.PrimaryKeyRelatedField(queryset=Chat.objects.all(), write_only=True)
 
     class Meta:

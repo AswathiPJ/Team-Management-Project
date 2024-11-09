@@ -6,6 +6,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import { TaskDetailedView } from "./pages/TaskDetailedView";
 import { PersonDetailedView } from "./pages/PersonDetailedView";
 import NoteDetailedView from "./pages/NoteDetailedView";
+import ChatDetailedView from "./pages/ChatDetailedView";
 import NotesVeiw from "./pages/NotesView";
 import TasksView from "./pages/TasksView";
 import ProjectsView from "./pages/ProjectsView";
@@ -13,6 +14,8 @@ import ProjectsView from "./pages/ProjectsView";
 import PeoplesView from "./pages/PeoplesView";
 import ChatsView from "./pages/ChatsView";
 import CalendarView from "./pages/CalendarView";
+
+
 
 const router = createBrowserRouter([
   {
@@ -31,6 +34,7 @@ const router = createBrowserRouter([
       { path: "/calendar", element: <CalendarView/> },
       { path: "/note/:noteId", element: <NoteDetailedView /> },
       { path: "/task/:taskId", element: <TaskDetailedView /> },
+      { path: "/chat/:slug", element: <ChatDetailedView/> },
       { path: "/person/:userId", element: <PersonDetailedView /> }
     ],
   },

@@ -12,5 +12,5 @@ class Team(models.Model):
 
 
     def __str__(self):
-        return f"Team: {self.name}"
+        return f"Team: {self.name} TeamID: {self.id}"
 
