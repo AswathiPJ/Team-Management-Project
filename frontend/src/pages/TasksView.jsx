@@ -52,21 +52,25 @@ const TasksView = () => {
           <StatsCard
             title="Total"
             value={tasks.length}
+            selectedStatus={selectedStatus === null}
             onClick={() => setSelectedStatus(null)}
           />
           <StatsCard
             title="Pending"
             value={taskCounts.Pending}
+            selectedStatus={selectedStatus === "Pending"}
             onClick={() => setSelectedStatus("Pending")}
           />
           <StatsCard
             title="In Progress"
             value={taskCounts.InProgress}
+            selectedStatus={selectedStatus === "In Progress"}
             onClick={() => setSelectedStatus("In Progress")}
           />
           <StatsCard
             title="Completed"
             value={taskCounts.Completed}
+            selectedStatus={selectedStatus === "Completed"}
             onClick={() => setSelectedStatus("Completed")}
           />
         </div>
@@ -84,10 +88,10 @@ const TasksView = () => {
                   priority={task.priority}
                   className={
                     task.priority === "High"
-                      ? "bg-red-400"
+                      ? "text-red-400"
                       : task.priority === "Medium"
-                        ? "bg-yellow-300"
-                        : "bg-green-400"
+                        ? "text-yellow-300"
+                        : "text-green-400"
                   }
                 />
               ))
@@ -98,12 +102,13 @@ const TasksView = () => {
                 description={task.description}
                 onClick={() => handleTaskView(task.id)}
                 priority={task.priority}
+                project={task.project.title}
                 className={
                   task.priority === "High"
-                    ? "bg-red-400"
+                    ? "text-red-400"
                     : task.priority === "Medium"
-                      ? "bg-yellow-300"
-                      : "bg-green-400"
+                      ? "text-yellow-300"
+                      : "text-green-400"
                 }
               />
             ))}
@@ -118,34 +123,45 @@ const CardComponent = ({
   onClick,
   className,
   priority,
+  project
 }) => {
   return (
     <div
-      className="card bg-base-100 w-72 shadow-xl cursor-pointer"
-      onClick={onClick}
+      className="card bg-base-100 w-72 shadow-xl cursor-default"
     >
       <div className="card-body p-4">
         <h2 className="card-title truncate">
           {title.length > 30 ? `${title.substring(0, 30)}...` : title}
         </h2>
-        <p className="text-truncate text-xs truncate">
+        <p className="text-truncate text-sm truncate">
           {description.length > 30
             ? `${description.substring(0, 30)}...`
             : description}
         </p>
+        <p className="text-sm">
+          Project: {project}
+        </p>
+        <p className="text-sm">
+          Priority: <span className={className}>{priority}</span>
+        </p>
         <div className="card-actions justify-end">
-          <span className={`${className} px-4 py-3 rounded-lg`}>
-            <span className="text-sm font-semibold">{priority}</span>
-          </span>
+          <button onClick={onClick} className="btn btn-primary px-4 py-3 rounded-lg">
+            <span className="text-sm font-semibold">View</span>
+          </button>
         </div>
       </div>
     </div>
   );
 };
 
-const StatsCard = ({ title, value, onClick }) => {
+const StatsCard = ({ title, value, onClick, selectedStatus }) => {
+  let className = "stat hover:bg-stone-200 cursor-pointer";
+  if (selectedStatus) {
+    className += " bg-stone-200";
+  }
+
   return (
-    <div onClick={onClick} className="stat hover:bg-stone-200 cursor-pointer">
+    <div onClick={onClick} className={className}>
       <div className="stat-title">{title}</div>
       <div className="stat-value text-center">{value}</div>
     </div>
@@ -158,11 +174,13 @@ CardComponent.propTypes = {
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string,
   priority: PropTypes.string,
+  project: PropTypes.string
 };
 
 StatsCard.propTypes = {
   title: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  selectedStatus: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
 };
 

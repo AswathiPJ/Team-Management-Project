@@ -1,9 +1,11 @@
 import axios from "axios";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const ProjectCard = ({ projects }) => {
   const [noOfTasks, setNoOfTasks] = useState({});
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchNoOfNotesOfAllProjects = async () => {
@@ -36,7 +38,7 @@ export const ProjectCard = ({ projects }) => {
       <div className="grid grid-cols-2">
         {projects.map((project) => (
           <div key={project.id} className="mx-2 my-1 border rounded-lg">
-            <button className="flex p-0.5 hover:bg-stone-200 rounded-lg transition-colors relative gap-2 w-full items-center">
+            <button onClick={() => navigate(`/projects`)} className="flex p-0.5 hover:bg-stone-200 rounded-lg transition-colors relative gap-2 w-full items-center">
               <img
                 width="64"
                 height="64"

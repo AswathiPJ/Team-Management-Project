@@ -17,13 +17,15 @@ const Login = () => {
   useEffect(() => {
     if (status === "succeeded") {
       navigate("/");
+      toast.success("Signed In")
+    } else if (status === "failed") {
+      toast.error("Wrong Credentials")
     }
   }, [status, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     dispatch(login({ username, password }));
-    toast.success("Signed In")
   };
 
   return (

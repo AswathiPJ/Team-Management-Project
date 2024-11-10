@@ -27,7 +27,7 @@ export const TopBar = () => {
         <div>
           {status === "succeeded" ? (
             <>
-              <span className="flex p-0.5 rounded-lg transition-colors relative gap-2 w-full items-center cursor-default">
+              <span className="flex p-1 rounded-lg transition-colors relative gap-2 items-center cursor-default">
                 <img
                   width="64"
                   height="64"
