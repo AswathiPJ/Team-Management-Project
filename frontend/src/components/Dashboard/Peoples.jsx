@@ -6,11 +6,14 @@ import { useEffect } from "react";
 
 export const Peoples = () => {
   const profiles = useSelector((state) => state.profiles.profile_list);
+  const token = useSelector((state) => state.auth.token)
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchProfiles());
-  }, [dispatch]);
+    if (token) {
+      dispatch(fetchProfiles());
+    }
+  }, [dispatch, token]);
 
   return (
     <div className="col-span-6 rounded-lg border h-72">
