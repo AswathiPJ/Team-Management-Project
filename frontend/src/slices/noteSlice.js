@@ -7,7 +7,8 @@ export const postNote = createAsyncThunk(
     try {
       const response = await axios.post(
         "http://localhost:8000/notes/",
-        noteData,  {withCredentials: true}
+        noteData,
+        { withCredentials: true }
       );
       return response.data;
     } catch (error) {
@@ -23,7 +24,8 @@ export const getNotes = createAsyncThunk(
     console.log(`user id used for fetching notes: ${userId}`);
     try {
       const response = await axios.get(
-        `http://localhost:8000/notes/?user=${userId}`, {withCredentials: true}
+        `http://localhost:8000/notes/?user=${userId}`,
+        { withCredentials: true }
       );
       return response.data;
     } catch (error) {
@@ -35,22 +37,46 @@ export const getNotes = createAsyncThunk(
 
 export const getSelectedNote = createAsyncThunk(
   "notes/getSelectedNote",
-  async(noteId, { rejectWithValue }) => {
+  async (noteId, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:8000/notes/${noteId}`, {withCredentials: true});
+      const response = await axios.get(
+        `http://localhost:8000/notes/${noteId}`,
+        { withCredentials: true }
+      );
       return response.data;
     } catch (error) {
       console.log(`Rejected with value ${error.response?.data?.detail}`);
-      return rejectWithValue(error.response?.data?.detail || { error: "Network error" });
+      return rejectWithValue(
+        error.response?.data?.detail || { error: "Network error" }
+      );
     }
   }
-)
+);
+
+export const editNote = createAsyncThunk(
+  "notes/editNote",
+  async (noteContent, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(
+        `http://localhost:8000/notes/${noteContent.id}/`,
+        noteContent,
+        { withCredentials: true }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error editing note:", error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 const initialState = {
   notes: [],
   error: null,
   postStatus: "idle",
   postError: null,
+  editNoteStatus: "idle",
+  editNoteError: null,
   getNotesStatus: "idle",
   getNotesError: null,
   selectedNote: null,
@@ -71,7 +97,7 @@ const noteSlice = createSlice({
       .addCase(postNote.fulfilled, (state, action) => {
         console.log("post request for notes completed.");
         console.log(action.payload);
-        state.notes.push(action.payload)
+        state.notes.push(action.payload);
         state.postStatus = "succeeded";
       })
       .addCase(postNote.rejected, (state, action) => {
@@ -96,7 +122,7 @@ const noteSlice = createSlice({
         state.getNotesError = action.error.message;
         state.getNotesStatus = "failed";
       });
-      builder
+    builder
       .addCase(getSelectedNote.pending, (state) => {
         console.log("Fetching selected note...");
         state.getSelectedNoteStatus = "loading";
@@ -112,6 +138,22 @@ const noteSlice = createSlice({
         console.log(action.payload);
         state.getSelectedNoteError = action.error.message;
         state.getSelectedNoteStatus = "failed";
+      });
+    builder
+      .addCase(editNote.pending, (state) => {
+        console.log("Editing note...");
+        state.editNoteStatus = "loading";
+      })
+      .addCase(editNote.fulfilled, (state, action) => {
+        console.log("Edit request for notes completed.");
+        console.log(action.payload);
+        state.editNoteStatus = "succeeded";
+      })
+      .addCase(editNote.rejected, (state, action) => {
+        console.log("Failed to edit note.");
+        console.log(action.error);
+        state.editNoteError = action.error.message;
+        state.editNoteStatus = "failed";
       });
   },
 });

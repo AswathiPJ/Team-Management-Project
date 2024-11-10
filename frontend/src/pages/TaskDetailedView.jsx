@@ -80,7 +80,7 @@ export const TaskDetailedView = () => {
             <p className="py-1 text-sm">{`Description: ${selectedTask.description}`}</p>
             <p className="py-1 text-sm">{`Project: ${selectedTask.project.title}`}</p>
             <p className="py-1 text-sm">{`Priority: ${selectedTask.priority}`}</p>
-            <p className="py-1 text-sm">{`Due Date: ${selectedTask.due_date}`}</p>
+            <p className="py-1 text-sm">{`Due Date: ${formatDateTime(selectedTask.due_date)}`}</p>
             <p className="py-1 text-sm">{`Status: ${selectedTask.status}`}</p>
             <p className="py-1 text-sm">{`Assigned By: : ${selectedTask.created_by}`}</p>
             <p className="py-1 text-sm">{`Assigned Users: ${getAssignedUserNames()}`}</p>
@@ -95,3 +95,12 @@ export const TaskDetailedView = () => {
     </div>
   );
 };
+
+function formatDateTime(dateString) {
+  const [date, time] = dateString.split('T');
+  const [year, month, day] = date.split('-');
+  const [hours, minutes] = time.split(':');
+  const timeZoneOffset = dateString.match(/([+-]\d{2}:\d{2})$/)[0];
+
+  return `${day}/${month}/${year} ${hours}:${minutes}  ${timeZoneOffset}`;
+}

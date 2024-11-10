@@ -19,8 +19,10 @@ export const Notes = () => {
 
   useEffect(() => {
     if (notePostStatus === "succeeded") {
-      toast.success("saved")
+      toast.success("Successfully Saved the Note")
       setNoteContent("");
+    } else if(notePostStatus === "failed") {
+      toast.error("Failed to Save the Note")
     }
   }, [notePostStatus])
 
@@ -31,7 +33,7 @@ export const Notes = () => {
         <div className="m-2 flex-grow">
           <textarea
             value={noteContent}
-            className=" focus:outline-none w-full h-full resize-none bg-transparent"
+            className="focus:outline-none w-full h-full resize-none bg-transparent"
             placeholder="Write down anything here..."
             onChange={(e) => setNoteContent(e.target.value)}
           ></textarea>

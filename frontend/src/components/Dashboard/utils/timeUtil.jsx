@@ -1,5 +1,3 @@
-// import { useRef, useEffect } from "react";
-
 export const getTimeRemaining = (dueDate) => {
   const now = new Date();
   const due = new Date(dueDate);

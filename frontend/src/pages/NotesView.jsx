@@ -10,15 +10,15 @@ const NotesView = () => {
   const notes = useSelector((state) => state.notes.notes);
   const getNotesStatus = useSelector((state) => state.notes.getNotesStatus);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getNotes(userId));
   }, [dispatch, userId]);
 
-  const handleNotesView=(noteId)=>{
-    navigate(`/note/${noteId}`)
-  }
+  const handleNotesView = (noteId) => {
+    navigate(`/note/${noteId}`);
+  };
 
   return (
     <div className="bg-white rounded-lg pb-4 shadow">
@@ -30,11 +30,19 @@ const NotesView = () => {
       ) : (
         <>
           {notes.map((note) => (
-            <div className="container border-2 mx-2" onClick={()=> handleNotesView(note.id)} key={note.id}>
-              <p>{note.id}</p>
-              <p>{note.content}</p>
-              <p>{note.created_at}</p>
-              <p>{note.updated_at}</p>
+            <div
+              className="shadow-lg m-4 rounded-lg hover:bg-stone-200 cursor-pointer"
+              onClick={() => handleNotesView(note.id)}
+              key={note.id}
+            >
+              <div className="p-6">
+                <p className="text-truncate text-base truncate">
+                  {note.content.length > 60
+                    ? `${note.content.substring(0, 60)}...`
+                    : note.content}
+                </p>
+                <p className="text-xs">Created at: {formatDateTime(note.created_at)}</p>
+              </div>
             </div>
           ))}
         </>
@@ -42,5 +50,14 @@ const NotesView = () => {
     </div>
   );
 };
+
+function formatDateTime(dateString) {
+  const [date, time] = dateString.split('T');
+  const [year, month, day] = date.split('-');
+  const [hours, minutes] = time.split(':');
+  const timeZoneOffset = dateString.match(/([+-]\d{2}:\d{2})$/)[0];
+
+  return `${day}/${month}/${year} ${hours}:${minutes}  ${timeZoneOffset}`;
+}
 
 export default NotesView;
