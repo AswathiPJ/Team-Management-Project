@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchSelectedTask, updateTaskStatus } from "../slices/taskSlice";
 import { useEffect } from "react";
 import { Card } from "antd";
+import toast from "react-hot-toast"
 
 export const TaskDetailedView = () => {
   const { taskId } = useParams();
@@ -19,6 +20,14 @@ export const TaskDetailedView = () => {
   useEffect(() => {
     dispatch(fetchSelectedTask(taskId));
   }, [dispatch, taskId, statusUpdateStatus]);
+
+  useEffect(() => {
+    if (statusUpdateStatus === "succeeded") {
+      toast.success("Status updated")
+    } else if (statusUpdateStatus === "failed") {
+      toast.error("Status update failed")
+    }
+  }, [statusUpdateStatus])
 
   const getAssignedUserNames = () => {
     return selectedTask.assigned_to.map((user) => user.username).join(", ");

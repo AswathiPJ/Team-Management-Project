@@ -31,7 +31,7 @@ function NoteDetailedView() {
   };
 
   useEffect(() => {
-    if (editNoteStatus === "success") {
+    if (editNoteStatus === "succeeded") {
       toast.success("Note saved successfully!");
     } else if(editNoteStatus === "failed") {
       toast.error("Failed to save Note")

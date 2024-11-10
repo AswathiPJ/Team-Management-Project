@@ -33,10 +33,10 @@ const Login = () => {
       <TopBar />
       <div
         className={`card ${
-          error ? "bg-red-400" : "bg-violet-400"
+          error ? "bg-red-400" : "bg-primary"
         } w-96 m-4 text-base font-medium rounded-lg`}
       >
-        <div className="card-body p-3">
+        <div className="card-body p-4">
           {error ? (
             <p>{error}</p>
           ) : (
@@ -87,8 +87,7 @@ const Login = () => {
               required
             />
           </label>
-          {/* <button className="btn bg-violet-400 rounded-lg p-0 text-sm" type="submit"> */}
-          <button className="bg-violet-400 rounded-lg p-2.5 shadow text-sm transition-colors hover:bg-stone-400" type="submit">
+          <button className="btn btn-primary rounded-lg p-0 text-sm" type="submit">
             {status === "loading" ? (
               <span className="loading loading-dots loading-md mx-4"></span>
             ) : (

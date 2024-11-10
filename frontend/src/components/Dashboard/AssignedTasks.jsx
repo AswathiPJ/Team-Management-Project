@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useMemo } from 'react';
+import toast from "react-hot-toast";
 
 const SORT_OPTIONS = ["All", "Pending", "In Progress", "Completed", "Overdue"];
 
@@ -23,6 +24,7 @@ export const AssignedTasks = () => {
     const currentIndex = SORT_OPTIONS.indexOf(sortOption);
     const nextIndex = (currentIndex + 1) % SORT_OPTIONS.length;
     setSortOption(SORT_OPTIONS[nextIndex]);
+    toast.success(`Sorted by ${SORT_OPTIONS[nextIndex]}`)
   }, [sortOption]);
 
   const filteredTasks = useMemo(() => {
