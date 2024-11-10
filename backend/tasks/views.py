@@ -1,5 +1,4 @@
 from rest_framework import viewsets
-from rest_framework.exceptions import PermissionDenied
 from django.db.models import Q
 from . import models, serializers
 
