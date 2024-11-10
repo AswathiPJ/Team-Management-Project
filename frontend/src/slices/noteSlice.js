@@ -7,7 +7,7 @@ export const postNote = createAsyncThunk(
     try {
       const response = await axios.post(
         "http://localhost:8000/notes/",
-        noteData
+        noteData,  {withCredentials: true}
       );
       return response.data;
     } catch (error) {
@@ -23,7 +23,7 @@ export const getNotes = createAsyncThunk(
     console.log(`user id used for fetching notes: ${userId}`);
     try {
       const response = await axios.get(
-        `http://localhost:8000/notes/?user=${userId}`
+        `http://localhost:8000/notes/?user=${userId}`, {withCredentials: true}
       );
       return response.data;
     } catch (error) {
@@ -37,7 +37,7 @@ export const getSelectedNote = createAsyncThunk(
   "notes/getSelectedNote",
   async(noteId, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:8000/notes/${noteId}`);
+      const response = await axios.get(`http://localhost:8000/notes/${noteId}`, {withCredentials: true});
       return response.data;
     } catch (error) {
       console.log(`Rejected with value ${error.response?.data?.detail}`);

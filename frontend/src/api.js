@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 export const apiClient = axios.create({
   baseURL: 'http://localhost:8000/',  // Adjust the base URL to match your Django backend URL
-//   withCredentials: true,
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },

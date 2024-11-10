@@ -8,7 +8,7 @@ export const ProjectCard = ({ projects }) => {
   useEffect(() => {
     const fetchNoOfNotesOfAllProjects = async () => {
       const promises = projects.map((project) =>
-        axios.get(`http://localhost:8000/projects/tasks/?project=${project.id}`)
+        axios.get(`http://localhost:8000/projects/tasks/?project=${project.id}`, {withCredentials:true})
       );
 
       try {

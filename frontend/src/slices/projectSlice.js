@@ -7,7 +7,7 @@ export const fetchProjects = createAsyncThunk(
     console.log(`user id used for fetching projects: ${userId}`);
     try {
       const response = await axios.get(
-        `http://localhost:8000/projects/users/?user=${userId}`
+        `http://localhost:8000/projects/users/?user=${userId}`, {withCredentials: true}
       );
       return response.data;
     } catch (error) {
@@ -26,7 +26,7 @@ export const fetchSelectedProject = createAsyncThunk(
   "projects/fetchSingle",
   async (projectId, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:8000/projects/${projectId}`);
+      const response = await axios.get(`http://localhost:8000/projects/${projectId}`, {withCredentials: true});
       return response.data;
     } catch (error) {
       console.log(`Rejected with value ${error.response?.data?.detail}`);

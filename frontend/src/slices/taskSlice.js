@@ -7,7 +7,7 @@ export const fetchTasks = createAsyncThunk(
     console.log(`user id used for fetching tasks: ${userId}`);
     try {
       const response = await axios.get(
-        `http://localhost:8000/tasks/?assigned_to=${userId}`
+        `http://localhost:8000/tasks/?assigned_to=${userId}`, {withCredentials: true}
       );
       return response.data;
     } catch (error) {
@@ -26,7 +26,7 @@ export const fetchSelectedTask = createAsyncThunk(
   "tasks/fetchSingle",
   async (taskId, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:8000/tasks/${taskId}`);
+      const response = await axios.get(`http://localhost:8000/tasks/${taskId}`, {withCredentials: true});
       return response.data;
     } catch (error) {
       console.log(`Rejected with value ${error.response?.data?.detail}`);
@@ -39,7 +39,7 @@ export const updateTaskStatus = createAsyncThunk(
   "tasks/update",
   async ({ id, status }, { rejectWithValue }) => {
     try {
-      const response = await axios.patch(`http://localhost:8000/tasks/${id}/`, { status });
+      const response = await axios.patch(`http://localhost:8000/tasks/${id}/`, { status }, {withCredentials: true});
       return response.data;
     } catch (error) {
       console.log(`Rejected with value ${error.response?.data?.detail}`);

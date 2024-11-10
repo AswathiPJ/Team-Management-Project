@@ -30,9 +30,12 @@ const NotesView = () => {
       ) : (
         <>
           {notes.map((note) => (
-            <h1 onClick={()=> handleNotesView(note.id)} key={note.id}>
-              {note.id} -&gt; {note.content}
-            </h1>
+            <div className="container border-2 mx-2" onClick={()=> handleNotesView(note.id)} key={note.id}>
+              <p>{note.id}</p>
+              <p>{note.content}</p>
+              <p>{note.created_at}</p>
+              <p>{note.updated_at}</p>
+            </div>
           ))}
         </>
       )}

@@ -8,13 +8,14 @@ const initialState = {
     username: Cookies.get("username") || null,
     userid: Cookies.get("userid") || null,
     email: Cookies.get("email") || null,
+    timezone: Cookies.get('timezone') || null,
     status: Cookies.get("status") || 'idle',
     error: null
 }
 
 export const login = createAsyncThunk('auth/login', async (credentials, { rejectWithValue }) => {
     try {
-        const response = await axios.post('http://localhost:8000/api/token/', credentials);
+        const response = await axios.post('http://localhost:8000/api/token/', credentials, {withCredentials: true});
         return response.data;
     } catch (error) {
         if (error.response && error.response.data) {
@@ -37,6 +38,7 @@ export const authSlice = createSlice({
             state.refreshToken = null;
             state.username = null;
             state.email = null;
+            state.timezone = null,
             state.userid = null;
             state.status = 'idle';
             state.error = null;
@@ -44,6 +46,7 @@ export const authSlice = createSlice({
             Cookies.remove('refreshToken')
             Cookies.remove('username')
             Cookies.remove('email')
+            Cookies.remove('timezone')
             Cookies.remove('status')
             Cookies.remove('userid')
         },
@@ -64,11 +67,13 @@ export const authSlice = createSlice({
                 state.username = action.payload.profile.username;
                 state.userid = action.payload.profile.id;
                 state.email = action.payload.profile.email
+                state.timezone = action.payload.profile.timezone
                 Cookies.set('token', action.payload.access)
                 Cookies.set('refreshToken', action.payload.refresh)
                 Cookies.set('username', action.payload.profile.username)
                 Cookies.set('userid', action.payload.profile.id)
                 Cookies.set('email', action.payload.profile.email)
+                Cookies.set('timezone', action.payload.profile.timezone)
                 Cookies.set('status', "succeeded")
             })
             .addCase(login.rejected, (state, action) => {

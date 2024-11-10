@@ -6,7 +6,7 @@ export const fetchProfiles = createAsyncThunk(
   async (_, rejectWithValue) => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/profiles/team-members"
+        "http://localhost:8000/profiles/team-members", {withCredentials: true}
       );
       return response.data;
     } catch (error) {
@@ -20,7 +20,7 @@ export const fetchSelectedProfile = createAsyncThunk(
   "profile/fetchSingle",
   async (userId, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:8000/profiles/team-members/${userId}`);
+      const response = await axios.get(`http://localhost:8000/profiles/team-members/${userId}`, {withCredentials: true});
       return response.data;
     } catch (error) {
       console.log(`Rejected with value ${error.response?.data?.detail}`);

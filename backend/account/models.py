@@ -1,7 +1,6 @@
-import pytz
+import zoneinfo
 from django.db import models
 from django.conf import settings
-from django.core.validators import RegexValidator
 
 DESIGNATION_CHOICES = [
     ('Manager', 'Manager'),
@@ -12,6 +11,7 @@ DESIGNATION_CHOICES = [
     ('Junior', 'Junior')
 ]
 
+TIMEZONES_CHOICES = [(tz, tz) for tz in zoneinfo.available_timezones()]
 
 class Profile(models.Model):
     user = models.OneToOneField(
@@ -24,8 +24,8 @@ class Profile(models.Model):
     joining_date = models.DateField()
     timezone = models.CharField(
         max_length=50,
-        choices=[(tz, tz) for tz in pytz.all_timezones],
-        default='UTC'
+        default="UTC",
+        choices=TIMEZONES_CHOICES,
     )
     contact_no = models.CharField(max_length=15)
 
