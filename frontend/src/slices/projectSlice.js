@@ -61,7 +61,7 @@ const projectSlice = createSlice({
     });
     builder.addCase(fetchProjects.rejected, (state, action) => {
       console.log("failed to fetch projects.")
-      console.log(action.payload)
+      console.log(action.error)
       state.error = action.error.message;
       state.status = "failed";
     });

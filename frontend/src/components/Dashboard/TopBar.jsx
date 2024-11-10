@@ -6,84 +6,20 @@ import {
   MdHelpOutline,
   MdOutlineFeedback,
 } from "react-icons/md";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
 
 export const TopBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [dateAndTime, setDateAndTime] = useState(new Date());
   const menuRef = useRef(null);
+  const status = useSelector((state) => state.auth.status);
+  const username = useSelector((state) => state.auth.username);
+  const email = useSelector((state) => state.auth.email);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setDateAndTime(new Date());
-    }, 30000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const getGreetingMessage = (currentTime) => {
-    const hour = currentTime.getHours();
-    if (hour < 12) {
-      return "Morning";
-    } else if (hour < 18) {
-      return "Afternoon";
-    } else {
-      return "Evening";
-    }
-  };
-
-  const formatDate = (dateObj) => {
-    const daysOfWeek = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-
-    let dayIndex = dateObj.getDay();
-    let monthIndex = dateObj.getMonth();
-
-    return `${daysOfWeek[dayIndex]}, ${months[monthIndex]} ${dateObj.getDate()}th`;
-  };
-
-  const formatTime = (timeObj) => {
-    const hours = timeObj.getHours().toString().padStart(2, "0");
-    const minutes = timeObj.getMinutes().toString().padStart(2, "0");
-
-    return `${hours}:${minutes} ${timeObj.getHours() >= 12 ? "PM" : "AM"}`;
-  };
-
-  const formattedDateAndTime = () => {
-    const now = new Date(dateAndTime);
-    return `${formatDate(now)} ${formatTime(now)}`;
-  };
-
-  const status = useSelector((state) => state.auth.status);
-  const username = useSelector((state) => state.auth.username);
 
   return (
     <div className="px-4 mb-4 mt-2 pb-4">
@@ -91,23 +27,28 @@ export const TopBar = () => {
         <div>
           {status === "succeeded" ? (
             <>
-              <span className="text-sm font-bold block">
-                🚀 Good {getGreetingMessage(new Date())}, {username}
-              </span>
-              <span className="text-xs block text-stone-500">
-                {formattedDateAndTime()}
+              <span className="flex p-0.5 rounded-lg transition-colors relative gap-2 w-full items-center cursor-default">
+                <img
+                  width="64"
+                  height="64"
+                  src={`https://ui-avatars.com/api/?background=random&name=${username}`}
+                  alt="checklist--v2"
+                  className="size-8 rounded-lg shrink-0 shadow"
+                />
+                <div className="text-start">
+                  <span className="text-lg font-semibold block">
+                    {username}
+                  </span>
+                  <span className="text-xs block">{email}</span>
+                </div>
               </span>
             </>
           ) : (
             <>
               <span className="text-sm font-bold block">Not Signed In</span>
-              <span className="text-xs block text-stone-500">
-                {formattedDateAndTime()}
-              </span>
             </>
           )}
         </div>
-        {/* <Toaster className="mt-2" /> */}
         <button
           className={`flex text-sm items-center gap-2 ${
             isMenuOpen ? "bg-violet-100" : "bg-stone-100"
