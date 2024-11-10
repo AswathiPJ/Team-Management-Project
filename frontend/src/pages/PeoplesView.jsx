@@ -16,19 +16,35 @@ const PeoplesView = () => {
   }, [dispatch, userId]);
 
   const handleProfileView = (userId) => {
-    navigate(`/person/${userId}`)
+    navigate(`/person/${userId}`);
   };
 
   return (
     <div className="bg-white rounded-lg pb-4 shadow">
       <TopBar />
-      {profiles.map((profile) => (
-        <div key={profile.id} className="m-4 border-2 cursor-pointer" onClick={() => handleProfileView(profile.id)}>
-          <p>{profile.username}</p>
-          <p>{profile.email}</p>
-          <p>{profile.designation}</p>
-        </div>
-      ))}
+      <div className="grid grid-cols-5 gap-4 p-4">
+        {profiles.map((profile) => (
+          <div
+            key={profile.id}
+            onClick={() => handleProfileView(profile.id)}
+            className="card shadow-lg bg-base-100 w-36 h-24 rounded-lg cursor-pointer transition-colors hover:bg-stone-300"
+          >
+            <figure className="mt-2">
+              <img
+                src={`https://ui-avatars.com/api/?background=random&name=${profile.username}`}
+                alt="avatar"
+                className="rounded-lg size-10 shadow"
+              />
+            </figure>
+            <div className="card-body items-center text-center p-0">
+              <span className="text-sm font-medium leading-none pt-1.5">
+                {profile.username}
+              </span>
+              <span className="text-xs leading-none">{profile.email}</span>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
