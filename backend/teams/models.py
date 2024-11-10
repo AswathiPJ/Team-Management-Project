@@ -8,9 +8,7 @@ class Team(models.Model):
     manager = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, related_name='managed_teams')
     created_on = models.DateTimeField(auto_now_add=True)
     members = models.ManyToManyField(Profile, related_name='teams')
-    
-
 
     def __str__(self):
-        return f"Team: {self.name} TeamID: {self.id}"
+        return self.name
 

@@ -12,7 +12,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields =['id','username']
 
 class ChatSerializer(serializers.ModelSerializer):
-    team= serializers.PrimaryKeyRelatedField(queryset=Team.objects.all())
+    team = serializers.StringRelatedField()
 
     class Meta:
         model = Chat

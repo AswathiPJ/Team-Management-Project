@@ -1,22 +1,12 @@
 import { TopBar } from "../components/Dashboard/TopBar";
-import React, { useEffect, useState, useRef } from "react";
-import { fetchMessages, sendMessage } from "../api";
+import { useEffect, useState, useRef } from "react";
+import { fetchMessages } from "../api";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import {
-  Button,
-  TextField,
-  Container,
-  Typography,
-  List,
-  ListItem,
-  ListItemText,
-} from "@mui/material";
+import PropTypes from "prop-types";
 
 function ChatDetailedView() {
   const { slug } = useParams();
-  console.log("slug", slug);
-  const [chats, setChats] = useState([]);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const chatboxRef = useRef(null);
@@ -44,13 +34,12 @@ function ChatDetailedView() {
     chatSocket.current.onmessage = function (e) {
       const data = JSON.parse(e.data);
       const message = {
-        user: { username:data.username,id:data.userid},
+        user: { username: data.username, id: data.userid },
         content: data.message,
-        id: new Date().getTime(), // Temporary ID, could be replaced with actual ID from server
+        id: new Date().getTime(),
       };
-      console.log(message)
+      console.log(message);
       setMessages((prevMessages) => [...prevMessages, message]);
-      scrollToBottom();
     };
 
     return () => {
@@ -59,8 +48,12 @@ function ChatDetailedView() {
   }, [slug]);
 
   const scrollToBottom = () => {
-    chatboxRef.current.scrollTop = chatboxRef.current.scrollHeight;
+    chatboxRef.current.scrollTop = chatboxRef.current.scrollHeight + 16;
   };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages])
 
   const handleSendMessage = () => {
     if (newMessage.length === 0) {
@@ -69,7 +62,7 @@ function ChatDetailedView() {
     }
     const messageData = {
       message: newMessage,
-      userid:userid,
+      userid: userid,
       username: username,
       room_name: slug,
     };
@@ -81,52 +74,65 @@ function ChatDetailedView() {
   return (
     <div className="bg-white rounded-lg pb-4 shadow">
       <TopBar />
-      <Container>
-        <Typography variant="h4">Chat Room</Typography>
+      <div className="m-4">
         <div
-          className="jumbotron"
           id="chatbox"
           ref={chatboxRef}
-          style={{
-            padding: "4px 2px",
-            maxHeight: "300px",
-            overflowY: "scroll",
-          }}
+          className="max-h-96 overflow-y-scroll"
         >
-          <List>
-            {messages.map((message) => (
-              <>
-                {console.log(userid)}
-                <ListItem key={message.id}>
-                  <ListItemText
-                    primary={message.user.username + ": " + message.content}
-                    className={
-                      message.user.id === userid ? "text-right" : "text-left"
-                    }
-                  />
-                </ListItem>
-              </>
-            ))}
-          </List>
+          {messages.map((message) => (
+            <ChatBubble
+              key={message.id}
+              sender={message.user.username}
+              content={message.content}
+              className={
+                message.user.username === username ? "chat-end" : "chat-start"
+              }
+            />
+          ))}
         </div>
-        <TextField
-          value={newMessage}
+        <input
+          type="text"
           onChange={(e) => setNewMessage(e.target.value)}
-          placeholder="Enter text here"
-          fullWidth
-          onKeyUp={(e) => {
-            if (e.keyCode === 13) {
-              e.preventDefault();
-              handleSendMessage();
-            }
-          }}
+          value={newMessage}
+          placeholder="Type here"
+          className="input input-bordered w-full max-w-xs"
         />
-        <Button onClick={handleSendMessage} variant="contained" color="primary">
+        <button
+          onClick={handleSendMessage}
+          className="btn btn-primary rounded-lg m-4"
+        >
           Send
-        </Button>
-      </Container>
+        </button>
+      </div>
     </div>
   );
 }
 
+const ChatBubble = ({ className, sender, content }) => {
+  return (
+    <div className={`chat ${className}`}>
+      <div className="chat-header">
+        {sender}
+        <time className="text-xs opacity-50 pl-2">2 hours ago</time>
+      </div>
+      <div className="chat-image avatar">
+        <div className="w-10 rounded-full">
+          <img
+            alt="user profile image"
+            src={`https://ui-avatars.com/api/?background=random&name=${sender}`}
+          />
+        </div>
+      </div>
+      <div className="chat-bubble">{content}</div>
+    </div>
+  );
+};
+
 export default ChatDetailedView;
+
+ChatBubble.propTypes = {
+  className: PropTypes.string,
+  sender: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+};
