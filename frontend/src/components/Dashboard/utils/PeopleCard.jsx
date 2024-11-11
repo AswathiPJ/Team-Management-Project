@@ -45,7 +45,7 @@ export const PeopleCard = ({ persons }) => {
               <figure className="mt-6">
                 <IoIosMore />
               </figure>
-              <div className="card-body items-center text-center p-0">
+              <div className="card-body items-center text-center p-0" onClick={() => navigate(`/peoples`)}>
                 <span className="text-sm font-medium leading-none pt-1.5">
                   {`Show All (${persons.length})`}
                 </span>
