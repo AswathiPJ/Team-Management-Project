@@ -40,6 +40,7 @@ export const PersonDetailedView = () => {
           style={{ width: 600 }}
         >
           <p className="py-1 text-sm">{`Username: ${selectedProfile.username}`}</p>
+          <p className="py-1 text-sm">{`designation: ${selectedProfile.designation}`}</p>
           <p className="py-1 text-sm">{`address: ${selectedProfile.address}`}</p>
           <p className="py-1 text-sm">{`Contact: ${selectedProfile.contact_no}`}</p>
           <p className="py-1 text-sm">{`DOB: ${selectedProfile.date_of_birth}`}</p>
@@ -48,13 +49,6 @@ export const PersonDetailedView = () => {
           <p className="py-1 text-sm">{`Timezone: ${selectedProfile.timezone}`}</p>
         </Card>
       ) : (
-        //   <h1>{`Username: ${selectedProfile.username}`}</h1>
-        //   <h1>{`address: ${selectedProfile.address}`}</h1>
-        //   <h1>{`Contact: ${selectedProfile.contact_no}`}</h1>
-        //   <h1>{`DOB: ${selectedProfile.date_of_birth}`}</h1>
-        //   <h1>{`Email: ${selectedProfile.email}`}</h1>
-        //   <h1>{`Joined da: ${selectedProfile.joining_date}`}</h1>
-        //   <h1>{`Timezone: ${selectedProfile.timezone}`}</h1>
         <div className="flex justify-center items-center h-48">
           <span className="text-center loading loading-bars loading-lg"></span>
         </div>
