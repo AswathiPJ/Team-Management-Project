@@ -30,4 +30,4 @@ class Profile(models.Model):
     contact_no = models.CharField(max_length=15)
 
     def __str__(self):
-        return f'Profile of {self.user.username}|| id:{self.id}'
+        return self.user.username
