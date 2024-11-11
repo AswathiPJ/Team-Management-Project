@@ -114,7 +114,7 @@ const ChatBubble = ({ className, sender, content }) => {
     <div className={`chat ${className}`}>
       <div className="chat-header">
         {sender}
-        <time className="text-xs opacity-50 pl-2">2 hours ago</time>
+        {/* <time className="text-xs opacity-50 pl-2">2 hours ago</time> */}
       </div>
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">

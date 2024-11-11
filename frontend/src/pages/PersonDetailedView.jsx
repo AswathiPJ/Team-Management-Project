@@ -40,8 +40,8 @@ export const PersonDetailedView = () => {
           style={{ width: 600 }}
         >
           <p className="py-1 text-sm">{`Username: ${selectedProfile.username}`}</p>
-          <p className="py-1 text-sm">{`designation: ${selectedProfile.designation}`}</p>
-          <p className="py-1 text-sm">{`address: ${selectedProfile.address}`}</p>
+          <p className="py-1 text-sm">{`Designation: ${selectedProfile.designation}`}</p>
+          <p className="py-1 text-sm">{`Address: ${selectedProfile.address}`}</p>
           <p className="py-1 text-sm">{`Contact: ${selectedProfile.contact_no}`}</p>
           <p className="py-1 text-sm">{`DOB: ${selectedProfile.date_of_birth}`}</p>
           <p className="py-1 text-sm">{`Email: ${selectedProfile.email}`}</p>

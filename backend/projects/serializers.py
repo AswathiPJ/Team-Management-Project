@@ -3,7 +3,7 @@ from .models import Project
 from teams.models import Team
 
 class ProjectSerializer(serializers.ModelSerializer):
-    team = serializers.PrimaryKeyRelatedField(queryset=Team.objects.all())
+    team = serializers.StringRelatedField()
     
     class Meta:
         model = Project
