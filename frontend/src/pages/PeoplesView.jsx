@@ -12,7 +12,7 @@ const PeoplesView = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchProfiles());
+    dispatch(fetchProfiles(userId));
   }, [dispatch, userId]);
 
   const handleProfileView = (userId) => {

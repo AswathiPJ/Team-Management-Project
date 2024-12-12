@@ -3,10 +3,10 @@ import axios from "axios";
 
 export const fetchProfiles = createAsyncThunk(
   "profiles/fetch",
-  async (_, rejectWithValue) => {
+  async (userId, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/profiles/team-members",
+        `http://localhost:8000/profiles/team-members/?user=${userId}`,
         { withCredentials: true }
       );
       return response.data;
