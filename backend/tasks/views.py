@@ -19,5 +19,4 @@ class TaskViewSet(viewsets.ModelViewSet):
                 return models.Task.objects.none()
         return super().get_queryset()
 
-    def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)
+

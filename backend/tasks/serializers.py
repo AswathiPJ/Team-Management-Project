@@ -2,12 +2,12 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from . import models
 from account.serializers import ProfileSerializer
-
+from account.models import Profile
 
 
 class TaskSerializer(serializers.ModelSerializer):
-    assigned_to = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    created_by = serializers.ReadOnlyField(source='created_by.user.username')
+    assigned_to = serializers.PrimaryKeyRelatedField(many=True, queryset=Profile.objects.all())
+    created_by = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all())
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
