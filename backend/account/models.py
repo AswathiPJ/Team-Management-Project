@@ -3,12 +3,12 @@ from django.db import models
 from django.conf import settings
 
 DESIGNATION_CHOICES = [
-    ('Project Manager', 'Project Manager'),
-    ('Team Lead', 'Team Lead'),
-    ('Software Developer', 'Software Developer'),
-    ('QA Engineer', 'QA Engineer'),
-    ('UI/UX Designer', 'UI/UX Designer'),
-    ('Business Analyst', 'Business Analyst')
+    ('ProjectManager', 'Project Manager'),
+    ('TeamLead', 'Team Lead'),
+    ('SoftwareDeveloper', 'Software Developer'),
+    ('QAEngineer', 'QA Engineer'),
+    ('UI/UXDesigner', 'UI/UX Designer'),
+    ('BusinessAnalyst', 'Business Analyst')
 ]
 
 TIMEZONES_CHOICES = [(tz, tz) for tz in zoneinfo.available_timezones()]
