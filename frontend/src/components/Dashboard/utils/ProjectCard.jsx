@@ -68,7 +68,7 @@ ProjectCard.propTypes = {
   projects: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      team: PropTypes.number.isRequired,
+      team: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       description: PropTypes.string,
       start_date: PropTypes.string,

@@ -23,6 +23,29 @@ export const fetchTasks = createAsyncThunk(
   }
 );
 
+export const fetchTasksAssigned = createAsyncThunk(
+  "tasksAssigned/fetch",
+  async (userId, { rejectWithValue }) => {
+    console.log(`user id used for fetching tasks assigned: ${userId}`);
+    try {
+      console.log({userId})
+      const response = await axios.get(
+        `http://localhost:8000/tasks/?created_by=${userId}`,
+        { withCredentials: true }
+      );
+      return response.data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        console.log(`rejected with value ${error.response.data.detail}`);
+        return rejectWithValue(error.response.data.detail);
+      } else {
+        console.log("rejected with value network error");
+        return rejectWithValue({ error: "Network error" });
+      }
+    }
+  }
+);
+
 export const fetchSelectedTask = createAsyncThunk(
   "tasks/fetchSingle",
   async (taskId, { rejectWithValue }) => {
@@ -62,6 +85,7 @@ export const updateTaskStatus = createAsyncThunk(
 
 const initialState = {
   task_list: [],
+  task_assigned_list: [],
   status: "idle",
   error: null,
   selected_task: null,
@@ -69,6 +93,8 @@ const initialState = {
   selected_error: null,
   status_update_status: null,
   status_update_error: null,
+  task_assigned_status: null,
+  task_assigned_error: null
 };
 
 const taskSlice = createSlice({
@@ -126,6 +152,24 @@ const taskSlice = createSlice({
       console.log("Failed to update task status.");
       state.status_update_error = action.error.message;
       state.status_update_status = "failed";
+    });
+
+    // selecting tasks assigned
+    builder.addCase(fetchTasksAssigned.pending, (state) => {
+      console.log("fetching tasks assigned...");
+      state.task_assigned_status = "loading";
+    });
+    builder.addCase(fetchTasksAssigned.fulfilled, (state, action) => {
+      console.log("fetched tasks assigned successfully.");
+      console.log(action.payload);
+      state.task_assigned_list = action.payload;
+      state.task_assigned_status = "succeeded";
+    });
+    builder.addCase(fetchTasksAssigned.rejected, (state, action) => {
+      console.log("failed to fetch tasks assigned.");
+      console.log(action.payload);
+      state.task_assigned_error = action.error.message;
+      state.task_assigned_status = "failed";
     });
   },
 });

@@ -10,12 +10,9 @@ import ChatDetailedView from "./pages/ChatDetailedView";
 import NotesVeiw from "./pages/NotesView";
 import TasksView from "./pages/TasksView";
 import ProjectsView from "./pages/ProjectsView";
-// import InboxView from "./pages/InboxView";
 import PeoplesView from "./pages/PeoplesView";
 import ChatsView from "./pages/ChatsView";
 import CalendarView from "./pages/CalendarView";
-
-
 
 const router = createBrowserRouter([
   {
@@ -26,7 +23,6 @@ const router = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/logout", element: <Logout /> },
       { path: "/tasks", element: <TasksView/> },
-      // { path: "/inbox", element: <InboxView/> },
       { path: "/projects", element: <ProjectsView /> },
       { path: "/peoples", element: <PeoplesView/> },
       { path: "/chats", element: <ChatsView/> },

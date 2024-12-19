@@ -89,7 +89,7 @@ TaskCard.propTypes = {
           user: PropTypes.number,
         })
       ),
-      created_by: PropTypes.string.isRequired,
+      created_by: PropTypes.number.isRequired,
       status: PropTypes.string.isRequired,
       priority: PropTypes.oneOf(['Low', 'Medium', 'High']).isRequired,
       due_date: PropTypes.oneOfType([
