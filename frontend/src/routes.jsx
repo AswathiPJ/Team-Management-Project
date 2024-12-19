@@ -13,7 +13,7 @@ import PeoplesView from "./pages/PeoplesView";
 import ChatsView from "./pages/ChatsView";
 import CalendarView from "./pages/CalendarView";
 import { TaskComponent } from "./components/ManagerDashboard/TaskComponent"
-import { ManagerTaskCreateView } from "./components/ManagerDashboard/ManagerTaskCreateView"
+import ManagerTaskCreateView from "./components/ManagerDashboard/ManagerTaskCreateView"
 
 const router = createBrowserRouter([
   {
