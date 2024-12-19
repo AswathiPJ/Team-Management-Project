@@ -8,6 +8,7 @@ import toast from "react-hot-toast"
 
 export const TaskDetailedView = () => {
   const { taskId } = useParams();
+  const role = useSelector((state) => state.auth.role);
   const selectedTask = useSelector((state) => state.tasks.selected_task);
   const selectedTaskFetchStatus = useSelector(
     (state) => state.tasks.selected_status
@@ -37,40 +38,94 @@ export const TaskDetailedView = () => {
     dispatch(updateTaskStatus({ id: taskId, status: newStatus }));
   };
 
-  const getStatusButtons = () => {
-    switch (selectedTask.status) {
-      case "Pending":
-        return (
-          <>
-            <button
-              className="btn bg-yellow-400 my-1 mr-2"
-              onClick={() => handleStatusChange("In Progress")}
-            >
-              Mark as In Progress
-            </button>
+  // const getStatusButtons = () => {
+  //   switch (selectedTask.status) {
+  //     case "Pending":
+  //       return (
+  //         <>
+  //           <button
+  //             className="btn bg-yellow-400 my-1 mr-2"
+  //             onClick={() => handleStatusChange("In Progress")}
+  //           >
+  //             Mark as In Progress
+  //           </button>
+  //           <button
+  //             className="btn bg-green-400 my-1 mr-2"
+  //             onClick={() => handleStatusChange("Completed")}
+  //           >
+  //             Mark as Completed
+  //           </button>
+  //         </>
+  //       );
+  //     case "In Progress":
+  //       return (
+  //         <>
+  //           <button
+  //             className="btn bg-green-400 my-1 mr-2"
+  //             onClick={() => handleStatusChange("Completed")}
+  //           >
+  //             Mark as Completed
+  //           </button>
+  //         </>
+  //       );
+  //     case "Completed":
+  //       return null;
+  //     default:
+  //       return null;
+  //   }
+  // };
+
+  const getStatusButtons = (role) => {
+    console.log(role)
+    if (role !== "ProjectManager") {
+      switch (selectedTask.status) {
+        case "Pending":
+          return (
+            <>
+              <button
+                className="btn bg-yellow-400 my-1 mr-2"
+                onClick={() => handleStatusChange("In Progress")}
+              >
+                Mark as In Progress
+              </button>
+              <button
+                className="btn bg-green-400 my-1 mr-2"
+                onClick={() => handleStatusChange("Completed")}
+              >
+                Mark as Completed
+              </button>
+            </>
+          );
+        case "In Progress":
+          return (
+            <>
+              <button
+                className="btn bg-green-400 my-1 mr-2"
+                onClick={() => handleStatusChange("Completed")}
+              >
+                Mark as Completed
+              </button>
+            </>
+          );
+        case "Completed":
+          return null;
+        default:
+          return null;
+      }
+    } else {
+      switch (selectedTask.status) {
+        case "Completed":
+          return (
             <button
               className="btn bg-green-400 my-1 mr-2"
-              onClick={() => handleStatusChange("Completed")}
+              onClick={() => handleStatusChange("Pending")}
             >
-              Mark as Completed
+              Mark as Pending
             </button>
-          </>
-        );
-      case "In Progress":
-        return (
-          <>
-            <button
-              className="btn bg-green-400 my-1 mr-2"
-              onClick={() => handleStatusChange("Completed")}
-            >
-              Mark as Completed
-            </button>
-          </>
-        );
-      case "Completed":
-        return null;
-      default:
-        return null;
+          );
+        default:
+          return null;
+      }
     }
   };
 
@@ -93,7 +148,7 @@ export const TaskDetailedView = () => {
             <p className="py-1 text-sm">{`Status: ${selectedTask.status}`}</p>
             <p className="py-1 text-sm">{`Assigned By: : ${selectedTask.created_by}`}</p>
             <p className="py-1 text-sm">{`Assigned Users: ${getAssignedUserNames()}`}</p>
-            {getStatusButtons()}
+            {getStatusButtons(role)}
           </Card>
         </>
       ) : (

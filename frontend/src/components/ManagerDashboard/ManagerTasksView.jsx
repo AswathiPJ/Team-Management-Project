@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const ManagerTasksView = () => {
-  const role = useSelector((state) => state.auth.role);  
   const userId = useSelector((state) => state.auth.userid);
   const tasks = useSelector((state) => state.tasks.task_assigned_list);
   const [selectedStatus, setSelectedStatus] = useState(null);
