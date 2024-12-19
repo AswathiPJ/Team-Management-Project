@@ -8,14 +8,12 @@ import { PersonDetailedView } from "./pages/PersonDetailedView";
 import NoteDetailedView from "./pages/NoteDetailedView";
 import ChatDetailedView from "./pages/ChatDetailedView";
 import NotesVeiw from "./pages/NotesView";
-// import TasksView from "./pages/TasksView";
 import ProjectsView from "./pages/ProjectsView";
 import PeoplesView from "./pages/PeoplesView";
 import ChatsView from "./pages/ChatsView";
 import CalendarView from "./pages/CalendarView";
-// import { useSelector } from "react-redux";
-// import { TasksManagerView } from "./components/ManagerDashboard/TasksManagerView";
 import { TaskComponent } from "./components/ManagerDashboard/TaskComponent"
+import { ManagerTaskCreateView } from "./components/ManagerDashboard/ManagerTaskCreateView"
 
 const router = createBrowserRouter([
   {
@@ -34,7 +32,8 @@ const router = createBrowserRouter([
       { path: "/note/:noteId", element: <NoteDetailedView /> },
       { path: "/task/:taskId", element: <TaskDetailedView /> },
       { path: "/chat/:slug", element: <ChatDetailedView/> },
-      { path: "/person/:userId", element: <PersonDetailedView /> }
+      { path: "/person/:userId", element: <PersonDetailedView /> },
+      { path: "/add-task", element: <ManagerTaskCreateView /> }
     ],
   },
 ]);

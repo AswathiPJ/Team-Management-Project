@@ -1,4 +1,5 @@
 import { MdOutlineSort } from "react-icons/md";
+import { MdOutlineAdd } from "react-icons/md";
 import { CardTitle } from "../Dashboard/utils/CardTitle";
 import { TaskCard } from "../Dashboard/utils/TaskCard";
 import { fetchTasksAssigned } from "../../slices/taskSlice";
@@ -52,6 +53,15 @@ export const TasksAssigned = () => {
     <div className="col-span-6 rounded-lg bg-stone-200 h-72">
       <CardTitle
         title={`Tasks Assigned (${tasks.length})`}
+        button2={
+          <button
+            onClick={() => navigate('/add-task') }
+            className="flex text-sm items-center gap-2 bg-stone-100 transition-colors hover:bg-violet-100 px-3 py-1.5 rounded-lg"
+          >
+            <MdOutlineAdd />
+            Assign Tasks
+          </button>
+        }
         button={
           <button
             onClick={handleSortClick}
