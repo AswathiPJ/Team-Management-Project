@@ -27,13 +27,15 @@ export const ProfileDetailedView = () => {
     }
   }, [userId]);
 
+  const isProfileLoaded = profile && Object.keys(profile).length > 0;
+
  
 
 
   return (
     <div className="bg-white rounded-lg pb-4 shadow">
       <TopBar />
-       
+      { isProfileLoaded ?  (
         <Card
           className="mx-4 rounded-lg bg-white shadow-xl border-2"
           title={
@@ -59,7 +61,13 @@ export const ProfileDetailedView = () => {
           <p className="py-1 text-sm">{`Joined date: ${profile.joining_date}`}</p>
           <p className="py-1 text-sm">{`Timezone: ${profile.timezone}`}</p>
         </Card>
-      
+      ) : (
+        <div className="flex justify-center items-center h-48">
+          <span className="text-center loading loading-bars loading-lg"></span>
+        </div>
+      )}
     </div>
   );
+      
+
 };
