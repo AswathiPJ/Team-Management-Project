@@ -14,6 +14,7 @@ import ChatsView from "./pages/ChatsView";
 import CalendarView from "./pages/CalendarView";
 import { TaskComponent } from "./components/ManagerDashboard/TaskComponent"
 import ManagerTaskCreateView from "./components/ManagerDashboard/ManagerTaskCreateView"
+import { ProfileDetailedView } from "./pages/ProfileDetailedView";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { path: "", element: <Dashboard /> },
       { path: "/login", element: <Login /> },
       { path: "/logout", element: <Logout /> },
+      { path: "/profile", element: <ProfileDetailedView/> },
       { path: "/tasks", element: <TaskComponent/> },
       { path: "/projects", element: <ProjectsView /> },
       { path: "/peoples", element: <PeoplesView/> },

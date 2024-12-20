@@ -65,7 +65,7 @@ export const TopBar = () => {
             <ul className="menu bg-base-200 rounded-lg w-56">
               <li>
                 <a
-                  href="#"
+                  href="/profile"
                   className="flex text-sm items-center gap-2 transition-colors px-3 py-1.5 rounded-lg"
                   onClick={() => setIsMenuOpen(false)}
                 >

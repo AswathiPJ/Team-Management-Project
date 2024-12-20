@@ -16,14 +16,19 @@ class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class= ProfileSerializer
 
     def get_queryset(self):
+        queryset = Profile.objects.all()
         profile_id = self.request.query_params.get('user')
-        if profile_id:
+        user_id = self.request.query_params.get('id')
+        if user_id:
+            queryset = queryset.filter(id=user_id)
+        elif profile_id:
             profile_id=int(profile_id)
             profile = Profile.objects.get(id=profile_id)
             teams = Team.objects.filter(members=profile)
             return Profile.objects.filter(teams__in=teams).exclude(id=profile_id).distinct()
         else:
             return Profile.objects.all()
+        return queryset
 
 
 
