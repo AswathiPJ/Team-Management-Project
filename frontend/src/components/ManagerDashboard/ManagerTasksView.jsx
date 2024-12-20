@@ -1,7 +1,7 @@
 import { TopBar } from "../Dashboard/TopBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { fetchTasks } from "../../slices/taskSlice";
+import { fetchTasksAssigned } from "../../slices/taskSlice";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -14,7 +14,7 @@ const ManagerTasksView = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchTasks(userId));
+    dispatch(fetchTasksAssigned(userId));
   }, [dispatch, userId]);
 
   const handleTaskView = (taskId) => {
