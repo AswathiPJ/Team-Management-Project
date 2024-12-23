@@ -86,6 +86,7 @@ const ManagerTasksView = () => {
                   description={task.description}
                   onClick={() => handleTaskView(task.id)}
                   priority={task.priority}
+                  project={task.project.title}
                   className={
                     task.priority === "High"
                       ? "text-red-400"
