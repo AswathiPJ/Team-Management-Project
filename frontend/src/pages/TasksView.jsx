@@ -86,6 +86,7 @@ const TasksView = () => {
                   description={task.description}
                   onClick={() => handleTaskView(task.id)}
                   priority={task.priority}
+                  project={task.project.title}
                   className={
                     task.priority === "High"
                       ? "text-red-400"
@@ -140,6 +141,7 @@ const CardComponent = ({
         </p>
         <p className="text-sm">
           Project: {project}
+          {/* {console.log(project)} */}
         </p>
         <p className="text-sm">
           Priority: <span className={className}>{priority}</span>

@@ -108,7 +108,7 @@ export const TaskDetailedView = () => {
             <p className="py-1 text-sm">{`Priority: ${selectedTask.priority}`}</p>
             <p className="py-1 text-sm">{`Due Date: ${formatDateTime(selectedTask.due_date)}`}</p>
             <p className="py-1 text-sm">{`Status: ${selectedTask.status}`}</p>
-            <p className="py-1 text-sm">{`Assigned By: ${selectedTask.created_by}`}</p>
+            {/* <p className="py-1 text-sm">{`Assigned By: ${selectedTask.created_by}`}</p> */}
             <p className="py-1 text-sm">{`Assigned Users: ${getAssignedUserNames()}`}</p>
             {getStatusButtons(role)}
           </Card>
